@@ -1,0 +1,50 @@
+/* General styles for forms */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for form labels */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Styles for form input fields */
+form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+/* Styles for form buttons */
+form button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Styles for the checkbox */
+form input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Styles specific to the login form */
+.login-form {
+    /* Add specific styles for the login form if needed */
+}
+
+/* Styles specific to the registration form */
+.registration-form {
+    /* Add specific styles for the registration form if needed */
+}
