@@ -29,6 +29,9 @@ class ArticleController extends AbstractController
 
         $user = $this->getUser(); // Assuming you are using Symfony's security system
         $article->setUser($user);
+        $article->setDateDeb(new \DateTimeImmutable());
+
+
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);

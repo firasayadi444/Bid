@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -22,8 +23,10 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
-    private ?\DateTime $date_deb= null ;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $date_deb = null;
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_fin = null;
 
@@ -198,18 +201,18 @@ class Article
 //    }
 
     /**
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getDateDeb(): DateTime
+    public function getDateDeb(): ?DateTimeImmutable
     {
         return $this->date_deb;
     }
 
     /**
-     * @param \DateTime|null $date_deb
+     * @param \DateTimeImmutable|null $date_deb
      */
-    public function setDateDeb(?\DateTime $date_deb): void
+    public function setDateDeb(?DateTimeImmutable $date_deb): void
     {
-        $this->date_deb = new DateTime('now');
+        $this->date_deb = $date_deb ?: new DateTimeImmutable();
     }
 }
