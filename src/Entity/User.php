@@ -203,4 +203,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->getNom() ?: 'User-' . $this->getId();
+        // You can customize this based on what makes sense for your application
+        // This example returns the user's name if available, or "User-ID" if not.
+    }
 }
