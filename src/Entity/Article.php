@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -21,9 +22,10 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_fin = null;
+    private ?\DateTime $date_deb = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $date_fin = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4)]
     private ?string $prix_depart = null;
@@ -81,12 +83,12 @@ class Article
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?\DateTime
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(\DateTimeInterface $date_fin): static
+    public function setDateFin(\DateTime $date_fin): static
     {
         $this->date_fin = $date_fin;
 
@@ -173,25 +175,41 @@ class Article
         return $this->bids;
     }
 
-    public function addBid(Bid $bid): static
-    {
-        if (!$this->bids->contains($bid)) {
-            $this->bids->add($bid);
-            $bid->setArticle($this);
-        }
+//    public function addBid(Bid $bid): static
+//    {
+//        if (!$this->bids->contains($bid)) {
+//            $this->bids->add($bid);
+//            $bid->setArticle($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeBid(Bid $bid): static
+//    {
+//        if ($this->bids->removeElement($bid)) {
+//            // set the owning side to null (unless already changed)
+//            if ($bid->getArticle() === $this) {
+//                $bid->setArticle(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
-        return $this;
+    /**
+     * @return DateTime
+     */
+    public function getDateDeb(): DateTime
+    {
+        return $this->date_deb;
     }
 
-    public function removeBid(Bid $bid): static
+    /**
+     * @param \DateTime|null $date_deb
+     */
+    public function setDateDeb(?\DateTime $date_deb): void
     {
-        if ($this->bids->removeElement($bid)) {
-            // set the owning side to null (unless already changed)
-            if ($bid->getArticle() === $this) {
-                $bid->setArticle(null);
-            }
-        }
-
-        return $this;
+        $this->date_deb = new DateTime('now');
     }
 }

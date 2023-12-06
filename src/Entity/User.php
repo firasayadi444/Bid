@@ -22,6 +22,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $address = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
+    private Collection $article;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Bid::class)]
+    private Collection $bid;
+
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -31,17 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $add_postal = null;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
-    private Collection $article;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Bid::class)]
-    private Collection $bid;
 
     public function __construct()
     {
@@ -152,27 +155,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->article;
     }
 
-    public function addArticle(Article $article): static
-    {
-        if (!$this->article->contains($article)) {
-            $this->article->add($article);
-            $article->setUser($this);
-        }
+//    public function addArticle(Article $article): static
+//    {
+//        if (!$this->article->contains($article)) {
+//            $this->article->add($article);
+//            $article->setUser($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeArticle(Article $article): static
+//    {
+//        if ($this->article->removeElement($article)) {
+//            // set the owning side to null (unless already changed)
+//            if ($article->getUser() === $this) {
+//                $article->setUser(null);
+//            }
+//        }
 
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        if ($this->article->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+ //       return $this;
+  //  }
 
     /**
      * @return Collection<int, Bid>

@@ -17,10 +17,7 @@ class ArticleType extends AbstractType
             ->add('date_fin')
             ->add('prix_depart')
             ->add('prix_final')
-            ->add('prixEnchereMax')
-            ->add('biddingPrices')
-            ->add('winningbidingprice')
-            ->add('user')
+
         ;
     }
 
