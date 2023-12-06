@@ -22,8 +22,8 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_deb = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
+    private ?\DateTime $date_deb= null ;
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_fin = null;
 
