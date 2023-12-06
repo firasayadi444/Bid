@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
 //            ->add('prixEnchereMax')
 //            ->add('biddingPrices')
 //            ->add('winningbidingprice')
-            ->add('user')
+          //     ->add('user')
         ;
     }
 

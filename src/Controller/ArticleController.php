@@ -26,6 +26,10 @@ class ArticleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
+
+        $user = $this->getUser(); // Assuming you are using Symfony's security system
+        $article->setUser($user);
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
