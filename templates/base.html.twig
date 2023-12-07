@@ -1,30 +1,74 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" type="text/css" href="source/bootstrap-3.3.6-dist/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="{{asset('source/font-awesome-4.5.0/css/font-awesome.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('style/slider.css')}}">
-	<link rel="stylesheet" type="text/css" href= "{{asset('style/mystyle.css')}}">
-    	<link rel="stylesheet" type="text/css" href= "{{asset('style/loginform.css')}}">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+	{# Other head content here #}
+	{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
+		<link rel="stylesheet" type="text/css" href="{{asset('source/bootstrap-3.3.6-dist/css/bootstrap.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('source/font-awesome-4.5.0/css/font-awesome.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('style/slider.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('style/mystyle.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('style/loginform.css')}}">
+	{% endblock %}
+</head>
 
-        {% endblock %}
+<body>
+<div class="allcontain">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
-<script type="text/javascript" src="{{asset('source/js/isotope.js')}}"></script>
-<script type="text/javascript" src="{{asset('source/js/myscript.js')}}"></script> 
-<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.1.11.js')}}"></script>
-<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/bootstrap.js')}}"></script>
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<!-- Navbar Up -->
+	<nav class="topnavbar navbar-default topnav">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand logo" href="#"><img src="image/logo1.png" alt="logo"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="upmenu">
+				{% block navbar%}
+
+					<ul class="nav navbar-nav" id="navbarontop">
+					<li class="active"><a href="#">HOME</a> </li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>
+						<ul class="dropdown-menu dropdowncostume">
+							<li><a href="#">Sport</a></li>
+							<li><a href="#">Old</a></li>
+							<li><a href="#">New</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DEALERS <span class="caret"></span></a>
+						<ul class="dropdown-menu dropdowncostume">
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="3">3</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="contact.html">CONTACT</a>
+					</li>
+						{% endblock %}
+				</ul>
+
+
+			</div>
+		</div>
+	</nav>
+
+	{% block body %}
+		{# Additional content in the body #}
+	{% endblock %}
+</div>
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.js')}}"></script>
+	<script type="text/javascript" src="{{asset('source/js/isotope.js')}}"></script>
+	<script type="text/javascript" src="{{asset('source/js/myscript.js')}}"></script>
+	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.1.11.js')}}"></script>
+	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/bootstrap.js')}}"></script>
+{% endblock %}
+
+{# Additional scripts or content #}
+</body>
 </html>
