@@ -1,0 +1,12 @@
+/* Add this style to ensure consistent dimensions for images */
+.img-container {
+    width: 200px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    overflow: hidden; /* Hide any overflow to maintain fixed dimensions */
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+  }

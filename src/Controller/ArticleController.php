@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -19,6 +21,15 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
+        ]);
+    }
+    #[Route('/usr', name: 'app_usr_article_index', methods: ['GET'])]
+    public function usrindex(ArticleRepository $articleRepository, UserInterface $user): Response
+    {
+        $articles = $articleRepository->findBy(['user' => $user]);
+
+        return $this->render('article/usrprofile.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
