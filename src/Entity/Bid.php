@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use DateTimeImmutable;
+use DateTime;
 use App\Repository\BidRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,9 +17,14 @@ class Bid
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4)]
     private ?string $bidingprice = null;
+     /**
+     * @param \DateTimeImmutable|null $date_deb
+     */
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $bidingdate = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $bidingdate = null;
+
+
 
     #[ORM\ManyToOne(inversedBy: 'bid')]
     #[ORM\JoinColumn(nullable: false)]
@@ -44,18 +50,23 @@ class Bid
 
         return $this;
     }
-
-    public function getBidingdate(): ?\DateTimeInterface
+/**
+     * @return DateTimeImmutable
+     */
+    public function getBidingdate(): ?DateTimeImmutable
     {
         return $this->bidingdate;
     }
 
-    public function setBidingdate(?\DateTimeInterface $bidingdate): static
+    /**
+     * @param \DateTimeImmutable|null $date_deb
+     */
+    public function setBidingdate(?DateTimeImmutable $bidingdate): void
     {
-        $this->bidingdate = $bidingdate;
-
-        return $this;
+        $this->bidingdate = $bidingdate ?: new DateTimeImmutable();
     }
+    
+   
 
     public function getUser(): ?User
     {

@@ -246,4 +246,8 @@ class Article
     {
         return $this->imageSize;
     }
+    public function __toString(): string
+{
+    return $this->titre ?? 'Untitled Article';
+}
 }
