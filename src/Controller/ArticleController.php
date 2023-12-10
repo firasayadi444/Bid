@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -21,12 +23,20 @@ class ArticleController extends AbstractController
             'articles' => $articleRepository->findAll(),
         ]);
     }
+    #[Route('/articles/{iduser}', name: 'app_usr_article_index', methods: ['GET'])]
+    public function userprofile(ArticleRepository $articleRepository, UserInterface $user): Response
+    {
+        $articles = $articleRepository->findBy(['user' => $user]);
+
+        return $this->render('profile/userarticles.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
 
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
-
         $user = $this->getUser(); // Assuming you are using Symfony's security system
         $article->setUser($user);
         $article->setDateDeb(new \DateTimeImmutable());

@@ -16,6 +16,9 @@
     </div>
 				{% block navbar%}
                     {{ parent() }}
+                    <li>
+                        <a href="{{path('app_usr_profile', {'iduser': app.user.userIdentifier }) }}">Profile</a>
+                    </li>
                     <button ><a class="postnewcar" href="{{ path('app_article_new') }}">POST NEW Bid</a></button>
                 {% endblock %}
     {% if app.user %}

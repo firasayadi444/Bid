@@ -1,0 +1,57 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+{% block body %}
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for article in articles %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <div class="img-container">
+                        {% if article.imageName %}
+                        <img class="card-img-top" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}" />
+                        {% else %}
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Placeholder" />
+                        {% endif %}
+                    </div>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ article.titre }}</h5>
+                            <!-- Product details-->
+                            <ul class="list-unstyled">
+                                <li>{{ article.description }}</li>
+                                <li>Date: {{ article.dateDeb ? article.dateDeb|date('Y-m-d') : '' }}</li>
+                                <li>Price: ${{ article.prixDepart }} - ${{ article.prixFinal }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="{{ path('app_article_show', {'id': article.id}) }}">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col mb-5">
+                <p>No records found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% if app.user %}
+<li>
+    <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+</li>
+
+{% endif %}
+{% endblock %}

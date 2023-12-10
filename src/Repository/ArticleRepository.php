@@ -23,7 +23,21 @@ class ArticleRepository extends ServiceEntityRepository
         $this->date_deb = new DateTimeImmutable('now');
 
     }
-
+    /**
+     * Get articles by user ID
+     *
+     * @param int $userId
+     * @return Article[]
+     */
+    public function findByUserId(int $userId): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :user')  // Assuming 'user' is the property in the Article entity representing the user
+            ->setParameter('user', $userId)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
