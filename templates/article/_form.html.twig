@@ -1,4 +1,13 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.titre) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.date_fin) }}
+    {{ form_row(form.prix_depart) }}
+    {{ form_row(form.prix_final) }}
+    <!-- ... Add other form fields as needed -->
+
+    {{ form_row(form.imageFile) }} {# Add this line for the file upload field #}
+
+    {{ form_row(form._token) }}
+    <button type="submit">Save</button>
 {{ form_end(form) }}

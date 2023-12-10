@@ -33,6 +33,16 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[Route('/usr', name: 'app_usr_article_index', methods: ['GET'])]
+    public function usrindex(ArticleRepository $articleRepository, UserInterface $user): Response
+    {
+        $articles = $articleRepository->findBy(['user' => $user]);
+
+        return $this->render('article/usrprofile.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

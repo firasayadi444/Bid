@@ -9,11 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+#[Route('/profile')]
 
 class UserController extends AbstractController
 {
 
-    #[Route('/user/{iduser}', name: 'app_usr_profile', methods: ['GET'])]
+    #[Route('/{iduser}', name: 'app_usr_profile', methods: ['GET'])]
     public function profile(ArticleRepository $articleRepository): Response
     {
         // Get the authenticated user
@@ -26,6 +27,20 @@ class UserController extends AbstractController
         return $this->render('baseprofile.html.twig', [
             'user' => $user,
             'articles' => $articleRepository->findBy(['user' => $user])
+        ]);
+    }
+    #[Route('/edit', name: 'user_profile_edit', methods: ['GET', 'POST'])]
+    public function editProfile(Request $request, UserInterface $user): Response
+    {
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('user_profile');
+        }
+        return $this->renderForm('profile/setting.html.twig', [
+            'form' => $form,
         ]);
     }
 

@@ -6,7 +6,8 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -17,11 +18,18 @@ class ArticleType extends AbstractType
             ->add('date_fin')
             ->add('prix_depart')
             ->add('prix_final')
-//            ->add('prixEnchereMax')
-//            ->add('biddingPrices')
-//            ->add('winningbidingprice')
-          //     ->add('user')
-        ;
+             // Add the file upload field
+             ->add('imageFile', VichImageType::class, [
+                'required' => false, // Set to true if the image is mandatory
+                'allow_delete' => true,
+                'download_uri' => false,
+            ]);
+
+        // Add the existing image field (if you want to display it in the form)
+        $builder->add('image', HiddenType::class, [
+            'mapped' => false,
+        ]);
+    
     }
 
     public function configureOptions(OptionsResolver $resolver): void
