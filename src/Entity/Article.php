@@ -30,8 +30,8 @@ class Article
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $date_deb = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_fin = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date_fin = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4)]
     private ?string $prix_depart = null;
@@ -47,7 +47,7 @@ class Article
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4, nullable: true)]
     private ?string $winningbidingprice = null;
-    
+
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
@@ -60,7 +60,7 @@ class Article
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-    
+
 
     #[ORM\ManyToOne(inversedBy: 'article')]
     #[ORM\JoinColumn(nullable: false)]
@@ -103,15 +103,14 @@ class Article
         return $this;
     }
 
-    public function getDateFin(): ?\DateTime
+    public function getDateFin(): DateTimeImmutable
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(\DateTime $date_fin): static
+    public function setDateFin(\DateTimeImmutable $date_fin): static
     {
         $this->date_fin = $date_fin;
-
         return $this;
     }
 

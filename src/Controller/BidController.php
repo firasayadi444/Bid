@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Bid;
 use App\Form\BidType;
 use App\Repository\BidRepository;
@@ -17,38 +18,44 @@ class BidController extends AbstractController
     #[Route('/', name: 'app_bid_index', methods: ['GET'])]
     public function index(BidRepository $bidRepository): Response
     {
-        return $this->render('bid/index.html.twig', [
+        return $this->render('bid/articlehome.html.twig', [
             'bids' => $bidRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_bid_new', methods: ['GET', 'POST'])]
-public function new(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $bid = new Bid();
+    #[Route('/{article_id}/new', name: 'app_bid_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, int $article_id): Response
+    {
+        $user = $this->getUser();
+        $article = $entityManager->getRepository(Article::class)->find($article_id);
+        if (!$article) {
+            throw $this->createNotFoundException('Article not found');
+        }
+        $bid = new Bid();
+        $bid->setUser($user);
+        $bid->setArticle($article);
+        $bid->setBidingdate(new \DateTimeImmutable());
 
-    // Set the user from the session
-    $user = $this->getUser();
-    $bid->setUser($user);
+        $form = $this->createForm(BidType::class, $bid, [
+            'user' => $user,
+            'article' => $article,
+        ]);
 
-    // Set the bid date
-    $bid->setBidingdate(new \DateTimeImmutable());
+        $form->handleRequest($request);
 
-    $form = $this->createForm(BidType::class, $bid);
-    $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($bid);
+            $entityManager->flush();
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        $entityManager->persist($bid);
-        $entityManager->flush();
+            return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
+        }
 
-        return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
+        return $this->renderForm('bid/new.html.twig', [
+            'bid' => $bid,
+            'form' => $form,
+        ]);
     }
 
-    return $this->renderForm('bid/new.html.twig', [
-        'bid' => $bid,
-        'form' => $form,
-    ]);
-}
 
 
     #[Route('/{id}', name: 'app_bid_show', methods: ['GET'])]

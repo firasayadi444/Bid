@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use Doctrine\DBAL\Types\DateTimeImmutableType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -15,7 +17,12 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('date_fin')
+            ->add('date_fin', DateTimeImmutableType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm:ss', // adjust the format as needed
+                'html5' => false, // prevent HTML5 validation, as Symfony might not fully support DateTimeImmutable with HTML5
+                'attr' => ['class' => 'datetimepicker'], // add any additional attributes or classes
+            ])
             ->add('prix_depart')
             ->add('prix_final')
              // Add the file upload field

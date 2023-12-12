@@ -19,26 +19,17 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('article/index.html.twig', [
+        return $this->render('article/articlehome.html.twig', [
             'articles' => $articleRepository->findAll(),
         ]);
     }
-    #[Route('/articles/{iduser}', name: 'app_usr_article_index', methods: ['GET'])]
-    public function userprofile(ArticleRepository $articleRepository, UserInterface $user): Response
-    {
-        $articles = $articleRepository->findBy(['user' => $user]);
 
-        return $this->render('profile/userarticles.html.twig', [
-            'articles' => $articles,
-        ]);
-    }
-
-    #[Route('/usr', name: 'app_usr_article_index', methods: ['GET'])]
+    #[Route('/{iduser}/myarticle', name: 'app_usr_article_index', methods: ['GET'])]
     public function usrindex(ArticleRepository $articleRepository, UserInterface $user): Response
     {
         $articles = $articleRepository->findBy(['user' => $user]);
 
-        return $this->render('article/usrprofile.html.twig', [
+        return $this->render('article/myarticles.html.twig', [
             'articles' => $articles,
         ]);
     }
@@ -50,8 +41,6 @@ class ArticleController extends AbstractController
         $user = $this->getUser(); // Assuming you are using Symfony's security system
         $article->setUser($user);
         $article->setDateDeb(new \DateTimeImmutable());
-
-
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
