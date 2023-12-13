@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Entity\Bid;
 use App\Form\BidType;
 use App\Repository\BidRepository;
@@ -18,29 +19,31 @@ class BidController extends AbstractController
     #[Route('/', name: 'app_bid_index', methods: ['GET'])]
     public function index(BidRepository $bidRepository): Response
     {
-        return $this->render('bid/articlehome.html.twig', [
+        return $this->render('bid/show.html.twig', [
             'bids' => $bidRepository->findAll(),
         ]);
     }
 
-    #[Route('/{article_id}/new', name: 'app_bid_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, int $article_id): Response
+    #[Route('/new/{article_id}', name: 'app_bid_new', methods: ['GET', 'POST'])]
+
+public function new(Request $request, EntityManagerInterface $entityManager, $article_id): Response
     {
-        $user = $this->getUser();
-        $article = $entityManager->getRepository(Article::class)->find($article_id);
-        if (!$article) {
-            throw $this->createNotFoundException('Article not found');
-        }
         $bid = new Bid();
+
+        // Set the user from the session
+        $user = $this->getUser();
         $bid->setUser($user);
-        $bid->setArticle($article);
+
+        // Set the bid date
         $bid->setBidingdate(new \DateTimeImmutable());
 
-        $form = $this->createForm(BidType::class, $bid, [
-            'user' => $user,
-            'article' => $article,
-        ]);
+        // Get the article using the passed article_id
+        $article = $entityManager->getRepository(Article::class)->find($article_id);
 
+        // Set the article for the bid
+        $bid->setArticle($article);
+
+        $form = $this->createForm(BidType::class, $bid);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -55,6 +58,7 @@ class BidController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
 
 
