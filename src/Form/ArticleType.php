@@ -17,12 +17,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('date_fin', DateTimeImmutableType::class, [
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd HH:mm:ss', // adjust the format as needed
-                'html5' => false, // prevent HTML5 validation, as Symfony might not fully support DateTimeImmutable with HTML5
-                'attr' => ['class' => 'datetimepicker'], // add any additional attributes or classes
-            ])
+            ->add('date_fin')
             ->add('prix_depart')
             ->add('prix_final')
              // Add the file upload field
