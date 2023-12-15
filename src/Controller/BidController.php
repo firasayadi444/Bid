@@ -9,9 +9,11 @@ use App\Form\BidType;
 use App\Repository\BidRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\DBAL\Types\TextType;
 
 #[Route('/bid')]
 class BidController extends AbstractController
@@ -25,8 +27,7 @@ class BidController extends AbstractController
     }
 
     #[Route('/new/{article_id}', name: 'app_bid_new', methods: ['GET', 'POST'])]
-
-public function new(Request $request, EntityManagerInterface $entityManager, $article_id): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, $article_id): Response
     {
         $bid = new Bid();
 
@@ -43,7 +44,9 @@ public function new(Request $request, EntityManagerInterface $entityManager, $ar
         // Set the article for the bid
         $bid->setArticle($article);
 
-        $form = $this->createForm(BidType::class, $bid);
+        $form = $this->createForm(BidType::class, $bid, [
+            'article' => $article, // Pass the article as an option
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,9 +56,9 @@ public function new(Request $request, EntityManagerInterface $entityManager, $ar
             return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('bid/new.html.twig', [
+        return $this->render('bid/new.html.twig', [
             'bid' => $bid,
-            'form' => $form,
+            'form' => $form->createView(), // Pass the FormView object
         ]);
     }
 
