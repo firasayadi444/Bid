@@ -38,7 +38,7 @@ class UserController extends AbstractController
 //            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_usr_profile', ['iduser' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_usr_profile', ['iduser' => $user->getUserIdentifier()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('profile/setting.html.twig', [
