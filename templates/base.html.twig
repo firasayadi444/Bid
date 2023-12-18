@@ -16,12 +16,20 @@
 
 <body>
 <div class="allcontain">
+	<div class="header">
 
+		{% if not app.user %}
+			<ul class="logreg">
+				<li><a href="{{ path('app_login') }}">Login </a> </li>
+				<li><a href="{{ path('app_register') }}"><span class="register">Register</span></a></li>
+			</ul>
+		{% endif %}
+	</div>
 	<!-- Navbar Up -->
 	<nav class="topnavbar navbar-default topnav">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand logo" href="#"><img src="image/logo1.png" alt="logo"></a>
+				<a class="navbar-brand logo" href="#"><img src="image/logo.png" alt="logo"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="upmenu">
 				{% block navbar%}
@@ -36,30 +44,72 @@
 							<li><a href="#">New</a></li>
 						</ul>
 					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DEALERS <span class="caret"></span></a>
-						<ul class="dropdown-menu dropdowncostume">
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="3">3</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="contact.html">CONTACT</a>
-					</li>
-						{% endblock %}
+						{% if app.user %}
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE<span class="caret"></span></a>
+
+								<ul class="dropdown-menu dropdowncostume">
+									<li><a href="{{path('app_usr_profile', {'iduser': app.user.userIdentifier }) }}">OverView</a></li>
+									<li><a href="{{path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My articles</a></li>
+									<li><a href="{{path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My bids</a></li>
+									<li><a href="{{path('user_profile_edit', {'iduser': app.user.userIdentifier }) }}">Setting </a></li>
+									<li><a href="{{ path('app_logout') }}"> Logout</a></li>
+								</ul>
+							</li>
+
+
+							<button><a class="postnewcar" href="{{ path('app_article_new') }}">POST NEW ARTICLE</a></button>
+						{% endif %}
+
 				</ul>
+				{% endblock %}
 
 
 			</div>
 		</div>
 	</nav>
-
-	{% block body %}
+</div>
+<div class="allcontain">
+	{% block register %}
 		{# Additional content in the body #}
 	{% endblock %}
-</div>
+	{% block login %}
+		{# Additional content in the body #}
+	{% endblock %}
+	{% block listarticlehomepage %}
+		{# Additional content in the body #}
+	{% endblock %}
+	{% block profilehome %}
+		{# Additional content in the body #}
+	{% endblock %}
 
+</div>
+<div class="bottommenu">
+
+	<ul class="nav nav-tabs bottomlinks">
+		<li role="presentation" ><a href="#/" role="button">ABOUT US</a></li>
+		<li role="presentation"><a href="#/">CATEGORIES</a></li>
+		<li role="presentation"><a href="#/">PREORDERS</a></li>
+		<li role="presentation"><a href="#/">CONTACT US</a></li>
+		<li role="presentation"><a href="#/">RECEIVE OUR NEWSLETTER</a></li>
+	</ul>
+
+	<img src="image/line.png" alt="line"> <br>
+	<div class="bottomsocial">
+		<a href="#"><i class="fa fa-facebook"></i></a>
+		<a href="#"><i class="fa fa-twitter"></i></a>
+		<a href="#"><i class="fa fa-google-plus"></i></a>
+		<a href="#"><i class="fa fa-pinterest"></i></a>
+	</div>
+	<div class="footer">
+		<div class="copyright">
+			&copy; Copy right 2023 | <a href="#">Privacy </a>| <a href="#">Policy</a>
+		</div>
+		<div class="atisda">
+			Designed by <a href="http://www.webdomus.net/">Bid App </a>
+		</div>
+	</div>
+</div>
 {% block javascripts %}
 	{{ encore_entry_script_tags('app') }}
 	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.js')}}"></script>
