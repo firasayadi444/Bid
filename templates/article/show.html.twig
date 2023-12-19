@@ -1,58 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+ {% block detailsarticle %}
+     {{ parent() }}
+     <div class="feturedimage">
 
-{% block body %}
-    <h1>Article</h1>
+         <div class="row firstrow">
 
-    <table class="table" border="1">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ article.description }}</td>
-            </tr>
-            <tr>
-                <th>Date_deb</th>
-                <td>{{ article.dateDeb ? article.dateDeb|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date_fin</th>
-                <td>{{ article.dateFin ? article.dateFin|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Prix_depart</th>
-                <td>{{ article.prixDepart }}</td>
-            </tr>
-            <tr>
-                <th>Prix_final</th>
-                <td>{{ article.prixFinal }}</td>
-            </tr>
-            <tr>
-                <th>PrixEnchereMax</th>
-                <td>{{ article.prixEnchereMax }}</td>
-            </tr>
-            <tr>
-                <th>BiddingPrices</th>
-                <td>{{ article.biddingPrices ? article.biddingPrices|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Winningbidingprice</th>
-                <td>{{ article.winningbidingprice }}</td>
-            </tr>
-        </tbody>
-    </table>
+                 <div class="col-lg-6 costumcol colborder1">
+                     <div class="row costumrow">
+                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 img1colon">
+                             <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="porsche">
+                         </div>
+                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 txt1colon ">
+                             <div class="featurecontant">
 
-    <a href="{{ path('app_article_index') }}">back to list</a>
+                                 <h1>{{  article.titre }}</h1>
+                                 <h2>Auctioneer : {{ article.user.nom }}</h2>
 
-    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                                 <p>{{ article.description }}</p>
+                                 <h2>Start with ${{ article.prixDepart }} </h2>
+                                 <h2>Max Bid ${{ article.prixFinal }}</h2>
+                                 <div id="timer" class="countdown-timer"
+                                      data-date="{{ article.dateFin ? article.dateFin|date('Y-m-d') : '' }}">
+                                 </div>
+                                 {# <button id="btnRM" onClick="rmtxt()" href="">SEE DETAILS</button>#}
+                                 <div class="text-center">
+                                     <a class="btn btn-outline-dark mt-auto" href="{{ path('app_bid_new', {'article_id': article.id}) }}">ADD BID</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
-    {{ include('article/_delete_form.html.twig') }}
-{% endblock %}
+         </div>
+     </div>
+ {% endblock %}
+

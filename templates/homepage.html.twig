@@ -16,20 +16,13 @@
                          </div>
                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 txt1colon ">
                              <div class="featurecontant">
-                                 <h1>{{ article.titre }}</h1>
+                                 <h1>{{  article.titre }}</h1>
+                                 <h2>Auctioneer : {{ article.user.nom }}</h2>
                                  <p>{{ article.description }}</p>
                                  <h2>Price ${{ article.prixDepart }} - ${{ article.prixFinal }}</h2>
-                                 <button id="btnRM" onClick="rmtxt()">SEE DETAILS</button>
-                                 <a href="{{ path('app_bid_new', {'article_id': article.id}) }}" class="featurecontant">
-                                     ADD BID
-                                 </a>
-                                 <div id="readmore">
-                                     <h1>Car Name</h1>
-                                     <p>"Lorem ipsum dolor sit amet, consectetur ,<br>
-                                         sed do eiusmod tempor incididunt <br>"Lorem ipsum dolor sit amet, consectetur ,<br>
-                                         sed do eiusmod tempor incididunt"Lorem ipsum dolor sit amet, consectetur1<br>
-                                     </p>
-                                     <button id="btnRL">READ LESS</button>
+{#                                 <button id="btnRM" href="{{ path('app_article_show', {'article_id': article.id}) }}" href="">SEE DETAILS</button>#}
+                                 <div id="btnRM">
+                                     <a id="btnRM" href="{{ path('app_article_show', {'article_id': article.id}) }}">View details</a>
                                  </div>
                              </div>
                          </div>

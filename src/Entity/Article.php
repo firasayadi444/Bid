@@ -11,6 +11,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[Vich\Uploadable]
@@ -32,9 +34,16 @@ class Article
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $date_fin = null;
-
+    /**
+     * @Assert\NotBlank(message="Please enter the start price.")
+     */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4)]
     private ?string $prix_depart = null;
+
+    /**
+     * @Assert\NotBlank(message="Please enter the final price.")
+     * @Assert\GreaterThan(propertyPath="prix_depart", message="The final price must be greater than the start price.")
+     */
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4, nullable: true)]
     private ?string $prix_final = null;

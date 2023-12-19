@@ -69,6 +69,7 @@
 		</div>
 	</nav>
 </div>
+
 <div class="allcontain">
 	{% block register %}
 		{# Additional content in the body #}
@@ -82,25 +83,20 @@
 	{% block profilehome %}
 		{# Additional content in the body #}
 	{% endblock %}
+	{% block newarticle %}
+		{# Additional content in the body #}
+	{% endblock %}
+
+	{% block detailsarticle %}
+
+	{% endblock %}
+	{% block addbid %}
+
+	{% endblock %}
+
 
 </div>
 <div class="bottommenu">
-
-	<ul class="nav nav-tabs bottomlinks">
-		<li role="presentation" ><a href="#/" role="button">ABOUT US</a></li>
-		<li role="presentation"><a href="#/">CATEGORIES</a></li>
-		<li role="presentation"><a href="#/">PREORDERS</a></li>
-		<li role="presentation"><a href="#/">CONTACT US</a></li>
-		<li role="presentation"><a href="#/">RECEIVE OUR NEWSLETTER</a></li>
-	</ul>
-
-	<img src="image/line.png" alt="line"> <br>
-	<div class="bottomsocial">
-		<a href="#"><i class="fa fa-facebook"></i></a>
-		<a href="#"><i class="fa fa-twitter"></i></a>
-		<a href="#"><i class="fa fa-google-plus"></i></a>
-		<a href="#"><i class="fa fa-pinterest"></i></a>
-	</div>
 	<div class="footer">
 		<div class="copyright">
 			&copy; Copy right 2023 | <a href="#">Privacy </a>| <a href="#">Policy</a>
@@ -117,6 +113,8 @@
 	<script type="text/javascript" src="{{asset('source/js/myscript.js')}}"></script>
 	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.1.11.js')}}"></script>
 	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/bootstrap.js')}}"></script>
+	<script type="text/javascript" src="{{asset('source/js/timer.js')}}"></script>
+
 {% endblock %}
 
 {# Additional scripts or content #}

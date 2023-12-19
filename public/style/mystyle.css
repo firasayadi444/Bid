@@ -806,50 +806,68 @@ font-weight: bold;
 .featurecontant{
 	width:85%;
 	height: auto;
-	border: 1px solid #C59E47;
 	margin-top: 7%;
- 
 	margin-right: auto;
 	margin-left: auto;
  
 }
+.countdown {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #333;
+}
+
+.expired {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #ff0000; /* Red color for expired message */
+}
+
+.lot-base-info img {
+	width: 100%; /* Ensure the image takes up the full width of its container */
+}
 .featurecontant>h1{
 	font-family: "OpenSans Regular";
 	font-size: 19.8px;
-	text-align: center;
+	text-align: left;
 	color: #5B5B5B;
-	margin-top:14%;
-	margin-bottom: 8px;
+	/*margin-top:14%;*/
+	/*margin-bottom: 8px;*/
+	/*margin-left: 25%; !* Adjust the left margin to center the button *!*/
+
 
 }
 .featurecontant>p{
 	font-family: "OpenSans Regular";
 	font-size: 11.44px;
-	text-align: center;
+	text-align: left;
 	color: #5B5B5B;
 }
 .featurecontant>h2{
 	font-family: "OpenSans Regular";
 	font-size: 12.41pt;
 	color: #020243;
-	text-align: center;
-	letter-spacing: 8px;
-	margin-top: 36%;
-	margin-bottom: 19px;
+	text-align: left;
+	/*letter-spacing: 8px;*/
+	/*margin-top: 36%;*/
+	/*margin-bottom: 19px;*/
 }
-.featurecontant>button{
+.featurecontant > button {
 	background: #020243;
 	border: 1px solid #020243;
 	font-family: "OpenSans Regular";
-	font-size: 19px;
-	color:#fff;
-	letter-spacing: 5px;
-	width: 68%;
-	margin-left: 17%;
-	margin-bottom: 26px;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	font-size: 14px; /* Adjust the font size if needed */
+	color: #fff;
+	letter-spacing: 3px;
+	width: 70%; /* Adjust the width as per your requirement */
+	margin-left: 25%; /* Adjust the left margin to center the button */
+	margin-bottom: 10px; /* Adjust the bottom margin */
+	padding-top: 10px; /* Adjust the top padding */
+	padding-bottom: 10px; /* Adjust the bottom padding */
 }
+
 .featurecontant>button:hover{
 	-moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
@@ -959,6 +977,12 @@ font-weight: bold;
     transition: all .2s ease-in; 
 }
 
+
+/* Style for the label (optional) */
+label {
+	margin-right: 10px;
+	font-weight: bold;
+}
 @media screen and (max-width: 1198px){
 .featurecontant{
 width: 85%;
@@ -966,12 +990,7 @@ margin-right:auto;
 margin-left: auto;
 
 }
- 
- 
-.costumrow{
-	border-top: 0px solid #BABABA;
-	border-bottom: 0px solid #BABABA;
-}
+
 .colborder1{
 border-top: 1px solid #BABABA;
 border-left: 1px solid #BABABA;

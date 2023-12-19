@@ -20,7 +20,6 @@ class BidType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ... other form fields
 
             ->add('bidingprice', TextType::class, [
                 'label' => 'Bid Price',

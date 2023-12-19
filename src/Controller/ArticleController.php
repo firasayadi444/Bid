@@ -7,6 +7,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,10 +50,15 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($article);
-            $entityManager->flush();
+            $dateDeb = $article->getDateDeb();
+            $dateFin = $article->getDateFin();
 
-            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+            if ($dateFin <= $dateDeb) {
+                $form->get('date_fin')->addError(new FormError('The "date_fin" should be greater than the "date_deb".'));
+            } else
+            { $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);}
         }
 
         return $this->renderForm('article/new.html.twig', [
@@ -61,13 +67,20 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    #[Route('/{article_id}', name: 'app_article_show', methods: ['GET'])]
+    public function show(int $article_id, ArticleRepository $articleRepository): Response
     {
+        $article = $articleRepository->find($article_id);
+
+        if (!$article) {
+            // Handle not found case, e.g., redirect or show an error
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
+
 
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
