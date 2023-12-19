@@ -21,6 +21,16 @@ class BidRepository extends ServiceEntityRepository
         parent::__construct($registry, Bid::class);
     }
 
+    public function findBidsForUserArticles($userId)
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.article', 'a')
+            ->where('b.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Bid[] Returns an array of Bid objects
 //     */

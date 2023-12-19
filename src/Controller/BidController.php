@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\DBAL\Types\TextType;
 
+
 #[Route('/bid')]
 class BidController extends AbstractController
 {
@@ -25,6 +26,16 @@ class BidController extends AbstractController
             'bids' => $bidRepository->findAll(),
         ]);
     }
+//    #[Route('/', name: 'app_bid_index', methods: ['GET'])]
+//    public function index(BidRepository $bidRepository): Response
+//    {
+//        $user = $this->getUser();
+//        $bids = $bidRepository->findBy(['user' => $user]);
+//
+//        return $this->render('bid/show.html.twig', [
+//            'bids' => $bids,
+//        ]);
+//    }
 
     #[Route('/new/{article_id}', name: 'app_bid_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, $article_id): Response
@@ -57,6 +68,7 @@ class BidController extends AbstractController
         }
 
         return $this->render('bid/new.html.twig', [
+            'article' => $article,
             'bid' => $bid,
             'form' => $form->createView(), // Pass the FormView object
         ]);
@@ -65,31 +77,50 @@ class BidController extends AbstractController
 
 
 
+//    #[Route('/{id}', name: 'app_bid_show', methods: ['GET'])]
+//    public function show(Bid $bid): Response
+//    {
+//        return $this->render('bid/show.html.twig', [
+//            'bid' => $bid,
+//        ]);
+//    }
+//    #[Route('/{id}', name: 'app_bid_show', methods: ['GET'])]
+//    public function show(Article $article): Response
+//    {
+//        dump($article);
+//        return $this->render('bid/show.html.twig', [
+//            'article' => $article,
+//        ]);
+//    }
     #[Route('/{id}', name: 'app_bid_show', methods: ['GET'])]
-    public function show(Bid $bid): Response
+    public function show(Article $article, BidRepository $bidRepository): Response
     {
+        $user = $this->getUser();
+        $bids = $bidRepository->findBy(['user' => $user, 'article' => $article]);
         return $this->render('bid/show.html.twig', [
-            'bid' => $bid,
+            'article' => $article,
+            'bids' => $bids,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_bid_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(BidType::class, $bid);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('bid/edit.html.twig', [
-            'bid' => $bid,
-            'form' => $form,
-        ]);
-    }
+//
+//    #[Route('/{id}/edit', name: 'app_bid_edit', methods: ['GET', 'POST'])]
+//    public function edit(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
+//    {
+//        $form = $this->createForm(BidType::class, $bid);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $entityManager->flush();
+//            return $this->redirectToRoute('user_profile');
+////            return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('bid/edit.html.twig', [
+//            'bid' => $bid,
+//            'form' => $form,
+//        ]);
+//    }
 
     #[Route('/{id}', name: 'app_bid_delete', methods: ['POST'])]
     public function delete(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
@@ -101,4 +132,29 @@ class BidController extends AbstractController
 
         return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
     }
+
+//    private $entityManager;
+//
+//    public function __construct(EntityManagerInterface $entityManager)
+//    {
+//        $this->entityManager = $entityManager;
+//    }
+
+    #[Route('bid/article_bids', name: 'article_bids', methods: ['GET'])]
+    public function articleBids(EntityManagerInterface $entityManager): Response
+    {
+        // Fetch articles with their associated bids
+        $articlesWithBids = $this->entityManager
+            ->getRepository(Article::class)
+            ->findAllWithBids(); // You need to define this custom method in your repository
+
+        return $this->render('bid/profile.html.twig', [
+            'articlesWithBids' => $articlesWithBids,
+        ]);
+    }
+
+
+
+
+
 }

@@ -212,4 +212,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // You can customize this based on what makes sense for your application
         // This example returns the user's name if available, or "User-ID" if not.
     }
+
 }

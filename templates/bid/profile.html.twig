@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Bids{% endblock %}
+
+{% block body %}
+    <h1>User Bids</h1>
+
+    {% set currentArticleId = null %}
+
+    {% for bid in userBidsForArticles %}
+        {% if currentArticleId is not null and bid.article.id != currentArticleId %}
+            </tbody>
+            </table>
+        {% endif %}
+
+        {% if currentArticleId is null or bid.article.id != currentArticleId %}
+            <h2>{{ bid.article.titre }}</h2>
+            <table>
+            <thead>
+            <tr>
+                <th>Bid Price</th>
+                <th>Bid Date</th>
+                <th>Bider</th>
+
+            </tr>
+            </thead>
+            <tbody>
+        {% endif %}
+
+        <tr>
+            <td>{{ bid.bidingprice }}</td>
+            <td>{{ bid.bidingdate ? bid.bidingdate|date('Y-m-d') : '' }}</td>
+            <td>{{ bid.user }}</td>
+
+        </tr>
+
+        {% set currentArticleId = bid.article.id %}
+    {% endfor %}
+
+    {% if currentArticleId is not null %}
+        </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}
