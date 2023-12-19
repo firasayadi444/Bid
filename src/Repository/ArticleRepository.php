@@ -38,6 +38,17 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    // custom rep
+
+//    public function findAllWithBids()
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->leftJoin('a.bids', 'b')
+//            ->addSelect('b')
+//            ->getQuery()
+//            ->getResult();
+//    }
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ProfileType;
 use App\Repository\ArticleRepository;
+use App\Repository\BidRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,13 +18,30 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
 
+
+
+    #[Route('/user_bids', name: 'user_bids', methods: ['GET'])]
+    public function getUserBidsForUserArticles(BidRepository $bidRepository): Response
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $userBidsForArticles = $bidRepository->findBidsForUserArticles($userId);
+
+        return $this->render('bid/profile.html.twig', [
+            'userBidsForArticles' => $userBidsForArticles,
+        ]);
+    }
+
+
+
     #[Route('/{iduser}', name: 'app_usr_profile', methods: ['GET'])]
     public function profile(): Response
     {
         // Get the authenticated user
         $user = $this->getUser();
 
-        return $this->render('profile/profile.html.twig', [
+        return $this->render('profile/profile.html.twig.twig', [
             'user' => $user,
         ]);
     }

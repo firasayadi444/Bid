@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 
+
 #[ORM\Entity(repositoryClass: BidRepository::class)]
 class Bid
 {
@@ -22,6 +23,7 @@ class Bid
      /**
      * @param \DateTimeImmutable|null $date_deb
      */
+
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $bidingdate = null;
@@ -67,8 +69,8 @@ class Bid
     {
         $this->bidingdate = $bidingdate ?: new DateTimeImmutable();
     }
-    
-   
+
+
 
     public function getUser(): ?User
     {
