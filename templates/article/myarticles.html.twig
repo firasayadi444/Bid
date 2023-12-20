@@ -4,8 +4,8 @@
 
 {% block articles %}
 
-    <div class="custom-block custom-block-exchange">
-        {% for article in articles %}
+<div class="custom-block custom-block-exchange">
+    {% for article in articles %}
         <div class="d-flex align-items-center border-bottom pb-3 mb-3">
             <div class="d-flex align-items-center">
                 <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Article Image"class="exchange-image img-fluid">
@@ -32,68 +32,69 @@
             <div>
                 <small>bids </small>
                 <button><a href="{{ path('user_bids', {'articleId': article.id}) }}">See all bids</a></button>
+            </div>
 
         </div>
-               {% endfor %}
-        {% endblock %}
+    {% endfor %}
+    {% endblock %}
 
-        {#<div class="custom-block custom-block-exchange">#}
+    {#<div class="custom-block custom-block-exchange">#}
 
-        {#<table class="table">#}
-        {#        <tbody>#}
-        {#        {% for article in articles %}#}
-        {#            <tr>#}
-        {#                <td>#}
-        {#                    <div class="d-flex align-items-center border-bottom pb-3 mb-3">#}
-        {#                        <div class="d-flex align-items-center">#}
-        {#                            <p> {{ article.titre }}</p>#}
-        {#                            <div>#}
-        {#                                <p>{{ article.description }}</p>#}
-        {#                            </div>#}
-        {#                        </div>#}
-        {#                        <div class="ms-auto me-4">#}
-        {#                            <small>prix final</small>#}
-        {#                            <h6>{{article.prix_final }}</h6>#}
-        {#                        </div>#}
+    {#<table class="table">#}
+    {#        <tbody>#}
+    {#        {% for article in articles %}#}
+    {#            <tr>#}
+    {#                <td>#}
+    {#                    <div class="d-flex align-items-center border-bottom pb-3 mb-3">#}
+    {#                        <div class="d-flex align-items-center">#}
+    {#                            <p> {{ article.titre }}</p>#}
+    {#                            <div>#}
+    {#                                <p>{{ article.description }}</p>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                        <div class="ms-auto me-4">#}
+    {#                            <small>prix final</small>#}
+    {#                            <h6>{{article.prix_final }}</h6>#}
+    {#                        </div>#}
 
-        {#                    </div>#}
-        {#                </td>#}
-        {#            </tr>#}
-        {#            <tr>#}
-        {#                <td>#}
-        {#                    <div class="d-flex align-items-center border-bottom pb-3 mb-3">#}
-        {#                        <div class="d-flex align-items-center">#}
-        {#                            <p> {{ article.titre }}</p>#}
-        {#                            <div>#}
-        {#                                <p>{{ article.description }}</p>#}
-        {#                            </div>#}
-        {#                        </div>#}
-        {#                        #}{#                        <div class="ms-auto me-4">#}
-        {#                        #}{#                            <small>prix final</small>#}
-        {#                        #}{#                            <h6>{{article.prix_final }}</h6>#}
-        {#                        #}{#                        </div>#}
+    {#                    </div>#}
+    {#                </td>#}
+    {#            </tr>#}
+    {#            <tr>#}
+    {#                <td>#}
+    {#                    <div class="d-flex align-items-center border-bottom pb-3 mb-3">#}
+    {#                        <div class="d-flex align-items-center">#}
+    {#                            <p> {{ article.titre }}</p>#}
+    {#                            <div>#}
+    {#                                <p>{{ article.description }}</p>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                        #}{#                        <div class="ms-auto me-4">#}
+    {#                        #}{#                            <small>prix final</small>#}
+    {#                        #}{#                            <h6>{{article.prix_final }}</h6>#}
+    {#                        #}{#                        </div>#}
 
-        {#                    </div>#}
-        {#                </td>#}
-        {#            </tr>#}
-        {#        {% endfor %}#}
-        {#        </tbody>#}
-        {#    </table>#}
+    {#                    </div>#}
+    {#                </td>#}
+    {#            </tr>#}
+    {#        {% endfor %}#}
+    {#        </tbody>#}
+    {#    </table>#}
 
 
-        {#    <ul>#}
-        {#        {% for article in articles %}#}
-        {#            <li>#}
-        {#                {{ article.titre }} - {{ article.description }}#}
-        {#                {% if article.imageName %}#}
-        {#<div class="img-container">#}
-        {#            <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Article Image" />#}
-        {#        </div>                {% endif %}#}
-        {#                <a href="{{ path('app_article_show', {'id': article.id}) }}">View</a>#}
-        {#            </li>#}
-        {#        {% else %}#}
-        {#            <li>No articles found.</li>#}
-        {#        {% endfor %}#}
-        {#    </ul>#}
+    {#    <ul>#}
+    {#        {% for article in articles %}#}
+    {#            <li>#}
+    {#                {{ article.titre }} - {{ article.description }}#}
+    {#                {% if article.imageName %}#}
+    {#<div class="img-container">#}
+    {#            <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Article Image" />#}
+    {#        </div>                {% endif %}#}
+    {#                <a href="{{ path('app_article_show', {'id': article.id}) }}">View</a>#}
+    {#            </li>#}
+    {#        {% else %}#}
+    {#            <li>No articles found.</li>#}
+    {#        {% endfor %}#}
+    {#    </ul>#}
 
 {#    <a href="{{ path('app_article_new') }}">Add New Article</a>#}
