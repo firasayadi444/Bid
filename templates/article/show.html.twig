@@ -23,7 +23,8 @@
                                  <div id="timer" class="countdown-timer"
                                       data-date="{{ article.dateFin ? article.dateFin|date('Y-m-d') : '' }}">
                                  </div>
-                                 {# <button id="btnRM" onClick="rmtxt()" href="">SEE DETAILS</button>#}
+                                 {# Include the addbid block here #}
+{#                                 {% include 'bid/new.html.twig' %}#}
                                  <div class="text-center">
                                      <a class="btn btn-outline-dark mt-auto" href="{{ path('app_bid_new', {'article_id': article.id}) }}">ADD BID</a>
                                  </div>

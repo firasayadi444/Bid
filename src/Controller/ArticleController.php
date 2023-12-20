@@ -20,10 +20,10 @@ use Symfony\Component\Form\FormTypeInterface;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/', name: 'app_article_index', methods: ['GET'])]
+    #[Route('/articles', name: 'app_allarticle_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('homepage.html.twig', [
+        return $this->render('article/homepage.html.twig', [
             'articles' => $articleRepository->findAll(),
         ]);
     }
@@ -37,7 +37,23 @@ class ArticleController extends AbstractController
             'articles' => $articles,
         ]);
     }
+    #[Route('/', name: 'app_article_index', methods: ['GET'])]
+    public function articlenotofcurrentuser(ArticleRepository $articleRepository): Response
+    {
+        $currentUser = $this->getUser();
 
+        if ($currentUser) {
+            $userId = $currentUser->getId();
+            $articles = $articleRepository->findArticlesNotOwnedByUser($userId);
+        } else {
+            // Handle the case when no user is authenticated
+            $articles = $articleRepository->findAll();
+        }
+
+        return $this->render('article/homepage.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
