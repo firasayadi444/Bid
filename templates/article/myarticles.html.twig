@@ -31,7 +31,7 @@
             </div>
             <div>
                 <small>bids </small>
-<button> see all bids</button>            </div>
+                <button><a href="{{ path('user_bids', {'articleId': article.id}) }}">See all bids</a></button>
 
         </div>
                {% endfor %}

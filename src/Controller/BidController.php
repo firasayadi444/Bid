@@ -123,7 +123,7 @@ class BidController extends AbstractController
             ->getRepository(Article::class)
             ->findAllWithBids(); // You need to define this custom method in your repository
 
-        return $this->render('bid/profile.html.twig', [
+        return $this->render('bid/articlebids.html.twig', [
             'articlesWithBids' => $articlesWithBids,
         ]);
     }

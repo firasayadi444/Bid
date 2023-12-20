@@ -20,15 +20,14 @@ class UserController extends AbstractController
 
 
 
-    #[Route('/user_bids', name: 'user_bids', methods: ['GET'])]
-    public function getUserBidsForUserArticles(BidRepository $bidRepository): Response
+    #[Route('/{articleId}/user_bids', name: 'user_bids', methods: ['GET'])]
+    public function getUserBidsForUserArticles(BidRepository $bidRepository,$articleId): Response
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
 
-        $userBidsForArticles = $bidRepository->findBidsForUserArticles($userId);
+        $userId = $this->getUser();
+        $userBidsForArticles = $bidRepository->findBidsForUserAndArticle($userId, $articleId);
 
-        return $this->render('bid/profile.html.twig', [
+        return $this->render('bid/articlebids.html.twig', [
             'userBidsForArticles' => $userBidsForArticles,
         ]);
     }
@@ -41,7 +40,7 @@ class UserController extends AbstractController
         // Get the authenticated user
         $user = $this->getUser();
 
-        return $this->render('profile/profile.html.twig', [
+        return $this->render('profile/articlebids.html.twig', [
             'user' => $user,
         ]);
     }
