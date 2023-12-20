@@ -103,24 +103,6 @@ class BidController extends AbstractController
         ]);
     }
 
-//
-//    #[Route('/{id}/edit', name: 'app_bid_edit', methods: ['GET', 'POST'])]
-//    public function edit(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
-//    {
-//        $form = $this->createForm(BidType::class, $bid);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager->flush();
-//            return $this->redirectToRoute('user_profile');
-////            return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
-//        }
-//
-//        return $this->renderForm('bid/edit.html.twig', [
-//            'bid' => $bid,
-//            'form' => $form,
-//        ]);
-//    }
 
     #[Route('/{id}', name: 'app_bid_delete', methods: ['POST'])]
     public function delete(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
@@ -132,13 +114,6 @@ class BidController extends AbstractController
 
         return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
     }
-
-//    private $entityManager;
-//
-//    public function __construct(EntityManagerInterface $entityManager)
-//    {
-//        $this->entityManager = $entityManager;
-//    }
 
     #[Route('bid/article_bids', name: 'article_bids', methods: ['GET'])]
     public function articleBids(EntityManagerInterface $entityManager): Response
