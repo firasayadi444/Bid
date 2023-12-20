@@ -144,7 +144,7 @@ class BidController extends AbstractController
     public function articleBids(EntityManagerInterface $entityManager): Response
     {
         // Fetch articles with their associated bids
-        $articlesWithBids = $this->entityManager
+        $articlesWithBids = $this->$entityManager
             ->getRepository(Article::class)
             ->findAllWithBids(); // You need to define this custom method in your repository
 

@@ -41,7 +41,7 @@ class UserController extends AbstractController
         // Get the authenticated user
         $user = $this->getUser();
 
-        return $this->render('profile/profile.html.twig.twig', [
+        return $this->render('profile/profile.html.twig', [
             'user' => $user,
         ]);
     }

@@ -14,6 +14,9 @@ Distributed by Tooplate.com
  License:  GARAGE template is under Creative Commons Attribution 4.0 International License.
  Template: GARAGE
  */
+body {
+	padding-top: 100px; /* Adjust the value based on your navbar height */
+}
 
 
 .allcontain{
@@ -139,6 +142,18 @@ padding-left: 5%;
 .topnav{
 	background: none;
 }
+.navbar-fixed-top {
+	background-color: #fff; /* Set your desired background color */
+	transition: background-color 0.3s ease-in-out; /* Add a smooth transition effect */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+/* Style for the navbar when scrolled */
+.navbar-fixed-top.navbar-scroll {
+	background-color: #333; /* Set your desired background color when scrolled */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Adjust the box shadow when scrolled */
+}
+
 .topnavbar .container{
 	margin-left: 107px !important;
 }

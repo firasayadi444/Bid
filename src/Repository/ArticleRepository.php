@@ -38,39 +38,20 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    // custom rep
+    /**
+     * Get articles excluding those owned by a specific user
+     *
+     * @param int $userId
+     * @return Article[]
+     */
+    public function findArticlesNotOwnedByUser(int $userId): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user != :user')  // Assuming 'user' is the property in the Article entity representing the user
+            ->setParameter('user', $userId)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findAllWithBids()
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->leftJoin('a.bids', 'b')
-//            ->addSelect('b')
-//            ->getQuery()
-//            ->getResult();
-//    }
-
-//    /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Article
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

@@ -11,6 +11,8 @@
 		<link rel="stylesheet" type="text/css" href="{{asset('style/slider.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('style/mystyle.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{asset('style/loginform.css')}}">
+		<link rel="stylesheet" href="{{asset('style/styles.css')}}" >
+
 	{% endblock %}
 </head>
 
@@ -26,11 +28,11 @@
 		{% endif %}
 	</div>
 	<!-- Navbar Up -->
-	<nav class="topnavbar navbar-default topnav">
+	<nav class="topnavbar navbar-default topnav navbar-fixed-top">
 		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand logo" href="#"><img src="image/logo.png" alt="logo"></a>
-			</div>
+{#			<div class="navbar-header">#}
+{#				<a class="navbar-brand logo" href="#"><img src="{{ asset('image/logo.jpg') }}" alt="logo"></a>#}
+{#			</div>#}
 			<div class="collapse navbar-collapse" id="upmenu">
 				{% block navbar%}
 
@@ -80,6 +82,9 @@
 	{% block listarticlehomepage %}
 		{# Additional content in the body #}
 	{% endblock %}
+	{% block homepage %}
+		{# Additional content in the body #}
+	{% endblock %}
 	{% block profilehome %}
 		{# Additional content in the body #}
 	{% endblock %}
@@ -88,11 +93,11 @@
 	{% endblock %}
 
 	{% block detailsarticle %}
+		{% block addbid %}
 
+		{% endblock %}
 	{% endblock %}
-	{% block addbid %}
 
-	{% endblock %}
 
 
 </div>
