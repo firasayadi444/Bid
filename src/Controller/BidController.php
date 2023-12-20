@@ -132,26 +132,26 @@ class BidController extends AbstractController
 
         return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
     }
-
+//
 //    private $entityManager;
 //
 //    public function __construct(EntityManagerInterface $entityManager)
 //    {
 //        $this->entityManager = $entityManager;
 //    }
-
-    #[Route('bid/article_bids', name: 'article_bids', methods: ['GET'])]
-    public function articleBids(EntityManagerInterface $entityManager): Response
-    {
-        // Fetch articles with their associated bids
-        $articlesWithBids = $this->entityManager
-            ->getRepository(Article::class)
-            ->findAllWithBids(); // You need to define this custom method in your repository
-
-        return $this->render('bid/profile.html.twig', [
-            'articlesWithBids' => $articlesWithBids,
-        ]);
-    }
+//
+//    #[Route('/article_bids', name: 'article_bids', methods: ['GET'])]
+//    public function articleBids(EntityManagerInterface $entityManager): Response
+//    {
+//        // Fetch articles with their associated bids
+//        $articlesWithBids = $this->entityManager
+//            ->getRepository(Article::class)
+//            ->findAllWithBids(); // You need to define this custom method in your repository
+//
+//        return $this->render('bid/profile.html.twig', [
+//            'articlesWithBids' => $articlesWithBids,
+//        ]);
+//    }
 
 
 
