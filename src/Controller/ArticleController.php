@@ -72,14 +72,12 @@ class ArticleController extends AbstractController
     {
         $article = $articleRepository->find($article_id);
 
-        if (!$article) {
-            // Handle not found case, e.g., redirect or show an error
-        }
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
+
 
 
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
