@@ -79,7 +79,6 @@ class ArticleController extends AbstractController
     }
 
 
-
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {

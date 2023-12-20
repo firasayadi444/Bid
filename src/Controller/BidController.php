@@ -26,6 +26,8 @@ class BidController extends AbstractController
             'bids' => $bidRepository->findAll(),
         ]);
     }
+
+
     #[Route('/new/{article_id}', name: 'app_bid_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, $article_id): Response
     {
@@ -33,27 +35,39 @@ class BidController extends AbstractController
         // Set the user from the session
         $user = $this->getUser();
         $bid->setUser($user);
+
         // Set the bid date
         $bid->setBidingdate(new \DateTimeImmutable());
+
         // Get the article using the passed article_id
         $article = $entityManager->getRepository(Article::class)->find($article_id);
+
         // Set the article for the bid
         $bid->setArticle($article);
+
         $form = $this->createForm(BidType::class, $bid, [
             'article' => $article, // Pass the article as an option
         ]);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($bid);
             $entityManager->flush();
-            return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('article/show.html.twig', [
+
+        return $this->render('bid/new.html.twig', [
             'article' => $article,
             'bid' => $bid,
             'form' => $form->createView(), // Pass the FormView object
         ]);
     }
+
+
+
+
+
     #[Route('/{id}', name: 'app_bid_show', methods: ['GET'])]
     public function show(Article $article, BidRepository $bidRepository): Response
     {
@@ -64,6 +78,7 @@ class BidController extends AbstractController
             'bids' => $bids,
         ]);
     }
+
 
     #[Route('/{id}', name: 'app_bid_delete', methods: ['POST'])]
     public function delete(Request $request, Bid $bid, EntityManagerInterface $entityManager): Response
@@ -80,7 +95,7 @@ class BidController extends AbstractController
     public function articleBids(EntityManagerInterface $entityManager): Response
     {
         // Fetch articles with their associated bids
-        $articlesWithBids = $this->entityManager
+        $articlesWithBids = $this->$entityManager
             ->getRepository(Article::class)
             ->findAllWithBids(); // You need to define this custom method in your repository
 
