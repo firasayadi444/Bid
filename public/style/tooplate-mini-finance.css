@@ -1,21 +1,11 @@
-/*
 
-Tooplate 2135 Mini Finance
-
-https://www.tooplate.com/view/2135-mini-finance
-
-*/
-
-/*---------------------------------------
-  CUSTOM PROPERTIES ( VARIABLES )             
------------------------------------------*/
 :root {
   --white-color:                  #ffffff;
   --primary-color:                #E63946;
   --secondary-color:              #F1FAEE;
   --section-bg-color:             #ececec;
   --primary-bg-color:             #E63946;
-  --custom-btn-bg-color:          #A8DADC;
+  --custom-btn-bg-color: #a8dcd4;
   --custom-btn-bg-hover-color:    #1D3557;
   --heading-color:                #1D3557;
   --dark-color:                   #000000;
@@ -47,12 +37,14 @@ https://www.tooplate.com/view/2135-mini-finance
 
 body {
   background-color: var(--white-color);
-  font-family: var(--body-font-family); 
+  font-family: var(--body-font-family);
+  margin: 50px;
+  padding: 0;
 }
 
 
 /*---------------------------------------
-  TYPOGRAPHY               
+  TYPOGRAPHY
 -----------------------------------------*/
 
 h2,
@@ -108,20 +100,14 @@ ul li {
   font-weight: var(--font-weight-light);
 }
 
-a, 
-button {
+a{
   touch-action: manipulation;
   transition: all 0.3s;
 }
 
 a {
   display: inline-block;
-  color: var(--primary-color);
   text-decoration: none;
-}
-
-a:hover {
-  color: var(--link-hover-color);
 }
 
 b,
@@ -131,11 +117,11 @@ strong {
 
 
 /*---------------------------------------
-  SECTION               
+  SECTION
 -----------------------------------------*/
 .main-wrapper {
-  background: var(--section-bg-color);
-  min-height: calc(100vh - 65px);
+  width: 100%;
+
 }
 
 .section-padding {
@@ -172,7 +158,7 @@ strong {
 
 
 /*---------------------------------------
-  TAB BAR              
+  TAB BAR
 -----------------------------------------*/
 .tab-content {
   background-color: var(--white-color);
@@ -196,9 +182,9 @@ strong {
   transition: all 0.3s;
 }
 
-.nav-tabs .nav-item.show .nav-link, 
+.nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active,
-.nav-tabs .nav-link:focus, 
+.nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
   border-bottom-color: var(--primary-color);
   color: var(--primary-color);
@@ -206,7 +192,7 @@ strong {
 
 
 /*---------------------------------------
-  PROFILE IMAGE              
+  PROFILE IMAGE
 -----------------------------------------*/
 .profile-image {
   border-radius: var(--border-radius-small);
@@ -297,7 +283,7 @@ strong {
 
 
 /*---------------------------------------
-  NOTIFICATIONS ICON              
+  NOTIFICATIONS ICON
 -----------------------------------------*/
 .dropdown-menu.notifications-block-wrap {
   min-width: 465px;
@@ -343,7 +329,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM BUTTON               
+  CUSTOM BUTTON
 -----------------------------------------*/
 .custom-btn {
   background: var(--custom-btn-bg-color);
@@ -379,194 +365,10 @@ strong {
 
 
 /*---------------------------------------
-  NAVIGATION              
------------------------------------------*/
-.sidebar {
-  background: var(--white-color);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: 58px 0 0;
-}
-
-.sidebar-sticky {
-  height: calc(100vh - 58px);
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
-}
-
-.logo-image {
-  width: 32px;
-  height: auto;
-}
-
-.navbar {
-  background: var(--white-color);
-  border-bottom: 1px solid var(--border-color);
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.navbar .nav-link {
-  position: relative;
-}
-
-.navbar .header-form {
-  width: 35%;
-}
-
-.navbar .header-form .form-control {
-  margin-bottom: 0;
-}
-
-.navbar .dropdown-toggle::after {
-  display: none;
-}
-
-.dropdown-menu {
-  overflow: hidden;
-  min-width: 240px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.dropdown-toggle {
-  width: 32px;
-}
-
-.dropdown-toggle .start-100 {
-  top: 8px;
-  left: 68%!important;
-}
-
-.dropdown .dropdown-item {
-  border-radius: var(--border-radius-small);
-  color: var(--p-color);
-  font-size: var(--menu-font-size);
-  font-weight: var(--font-weight-light);
-  display: inline-block;
-  margin-right: 15px;
-  margin-left: 15px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  width: auto;
-}
-
-.dropdown .dropdown-item:hover {
-  background: var(--primary-color);
-  color: var(--white-color);
-}
-
-.navbar-nav .dropdown-menu {
-  border-color: transparent;
-  border-radius: var(--border-radius-small);
-  position: absolute;
-}
-
-.dropdown-menu[data-bs-popper] {
-  right: 0;
-  left: auto;
-}
-
-#sidebarMenu .nav {
-  flex-wrap: inherit;
-}
-
-#sidebarMenu .nav-link {
-  border-radius: var(--border-radius-small);
-  color: var(--p-color);
-  font-size: var(--menu-font-size);
-  display: inline-block;
-  position: relative;
-  margin-top: 5px;
-}
-
-#sidebarMenu .nav-link.active, 
-#sidebarMenu .nav-link:hover {
-  background: var(--primary-color);
-  color: var(--white-color);
-}
-
-.navbar-toggler {
-  background: var(--primary-color);
-  border-radius: var(--border-radius-small);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 222;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  margin: 10px;
-  width: 40px;
-  height: 40px;
-  outline: none;
-}
-
-.navbar-toggler:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-  background: transparent;
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before,
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
-  transition: top 300ms 50ms ease, -webkit-transform 300ms 350ms ease;
-  transition: top 300ms 50ms ease, transform 300ms 350ms ease;
-  transition: top 300ms 50ms ease, transform 300ms 350ms ease, -webkit-transform 300ms 350ms ease;
-  top: 0;
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
-  transform: rotate(45deg);
-}
-
-.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
-  transform: rotate(-45deg);
-}
-
-.navbar-toggler .navbar-toggler-icon {
-  background: var(--white-color);
-  transition: background 10ms 300ms ease;
-  display: block;
-  margin: auto;
-  width: 23px;
-  height: 2px;
-  position: relative;
-}
-
-.navbar-toggler .navbar-toggler-icon:before,
-.navbar-toggler .navbar-toggler-icon:after {
-  transition: top 300ms 350ms ease, -webkit-transform 300ms 50ms ease;
-  transition: top 300ms 350ms ease, transform 300ms 50ms ease;
-  transition: top 300ms 350ms ease, transform 300ms 50ms ease, -webkit-transform 300ms 50ms ease;
-  position: absolute;
-  right: 0;
-  left: 0;
-  background: var(--white-color);
-  width: 23px;
-  height: 2px;
-  content: '';
-}
-
-.navbar-toggler .navbar-toggler-icon::before {
-  top: -8px;
-}
-
-.navbar-toggler .navbar-toggler-icon::after {
-  top: 8px;
-}
-
+  NAVIGATION
 
 /*---------------------------------------
-  CUSTOM BLOCK               
+  CUSTOM BLOCK
 -----------------------------------------*/
 .custom-block {
   background: var(--secondary-color);
@@ -713,7 +515,9 @@ strong {
 .custom-block-exchange .border-bottom {
   border-bottom: 1px solid #c6e5e7 !important;
 }
-
+th {
+  padding: 10px;
+}
 .custom-block-exchange h6 {
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-normal);
@@ -789,7 +593,7 @@ strong {
 
 
 /*---------------------------------------
-  SEARCH, PROFILE FORM               
+  SEARCH, PROFILE FORM
 -----------------------------------------*/
 .profile-form .input-group .form-control {
   background: #e9ecef;
@@ -811,7 +615,7 @@ strong {
 
 
 /*---------------------------------------
-  ACCOUNT TABLE               
+  ACCOUNT TABLE
 -----------------------------------------*/
 .account-table {
   background: var(--section-bg-color);
@@ -858,7 +662,7 @@ strong {
 
 
 /*---------------------------------------
-  PAGINATION              
+  PAGINATION
 -----------------------------------------*/
 .pagination {
   margin-top: 20px;
@@ -901,7 +705,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM FORM               
+  CUSTOM FORM
 -----------------------------------------*/
 .custom-form .form-control {
   color: var(--p-color);
@@ -950,7 +754,7 @@ strong {
 
 
 /*---------------------------------------
-  SITE FOOTER              
+  SITE FOOTER
 -----------------------------------------*/
 .site-footer {
   padding-right: 20px;
@@ -963,7 +767,7 @@ strong {
 
 
 /*---------------------------------------
-  RESPONSIVE STYLES               
+  RESPONSIVE STYLES
 -----------------------------------------*/
 @media screen and (max-width: 1200px) {
   h1 {
@@ -1008,30 +812,12 @@ strong {
     height: calc(100vh - 117px);
   }
 
-  .navbar .header-form {
-    width: 100%;
-    margin: 10px;
-  }
 
-  .navbar .nav-link {
-    padding-top: 7px;
-  }
-
-  .navbar-nav .dropdown:last-child {
-    margin-right: 50px;
-  }
 }
 
 
 @media screen and (max-width: 580px) {
-  .navbar-nav .dropdown-menu {
-    width: 95%;
-    min-width: 240px;
-    margin: auto;
-    top: 60px;
-    right: 0;
-    left: 0;
-  }
+
 
   .dropdown-menu[data-bs-popper] {
     top: 60px;
@@ -1066,14 +852,7 @@ strong {
     font-size: 20px;
   }
 
-  .navbar-nav .dropdown-menu {
-    width: 95%;
-    min-width: 240px;
-    margin: auto;
-    top: 60px;
-    right: 0;
-    left: 0;
-  }
+
 
   .dropdown-menu[data-bs-popper] {
     top: 60px;
@@ -1085,10 +864,7 @@ strong {
     position: inherit;
   }
 
-  .navbar-brand,
-  .custom-block p {
-    font-size: var(--menu-font-size);
-  }
+
 
   .custom-block .profile-image {
     width: 32px;

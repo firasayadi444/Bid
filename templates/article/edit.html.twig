@@ -1,13 +1,44 @@
 {% extends 'base.html.twig' %}
+{#{{ form_start(form) }}#}
+{#    {{ form_row(form.titre) }}#}
+{#    {{ form_row(form.date_fin) }}#}
+{#    {{ form_row(form.prix_depart) }}#}
+{#    {{ form_row(form.prix_final) }}#}
 
-{% block title %}Edit Article{% endblock %}
+{#    {{ form_row(form.imageFile) }} #}{# Add this line for the file upload field #}
 
-{% block body %}
-    <h1>Edit Article</h1>
+{#    {{ form_row(form._token) }}#}
+{#<button type="submit">Save</button>#}
+{#{{ form_end(form) }}#}
+{% block editarticle %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    {{ form_start(form, { 'attr': {'enctype': 'multipart/form-data'} }) }}
+                    {# Add this line for the file upload field #}
+                    <img class="card-img-top mb-5 mb-md-0" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="..." />
+                </div>
+                <div class="col-md-6">
+                    <h2 class="display-1 fw-bolder">    {{ form_row(form.titre) }}
+                    </h2>
+                    <div class="fs-5 mb-5">
+                        <span> {{ form_row(form.prix_depart) }}</span>
+                        <span> {{ form_row(form.prix_final) }}</span>
+                        <span> {{ form_row(form.date_fin) }}</span>
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                    <p class="lead">      {{ form_row(form.description) }}
+                    </p>
+                    {{ form_row(form.imageFile) }}
+                    <div class="d-flex">
+                        <button type="submit">Save</button>
 
-    <a href="{{ path('app_article_index') }}">back to list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ form_end(form) }}
 
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}

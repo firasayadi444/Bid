@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+	<link rel="preconnect" href="{{ asset('https://fonts.googleapis.com') }}">
+	<link rel="preconnect" href="{{ asset('https://fonts.gstatic.com') }}" crossorigin>
+	<link href="{{ asset('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap') }}" rel="stylesheet">
+
+	<link rel="icon" href="{{ asset('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>') }}">
 	{# Other head content here #}
 	{% block stylesheets %}
 		{{ encore_entry_link_tags('app') }}
@@ -13,7 +17,6 @@
 {#		<link rel="stylesheet" type="text/css" href="{{asset('style/imDim.css')}}">#}
 		<link rel="stylesheet" type="text/css" href="{{asset('style/loginform.css')}}">
 		<link rel="stylesheet" href="{{asset('style/styles.css')}}" >
-		<link rel="stylesheet" href="{{asset('style/stylesitem.css')}}" >
 
 
 	{% endblock %}
@@ -40,15 +43,15 @@
 				{% block navbar%}
 
 					<ul class="nav navbar-nav" id="navbarontop">
-					<li class="active"><a href="#">HOME</a> </li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>
-						<ul class="dropdown-menu dropdowncostume">
-							<li><a href="#">Sport</a></li>
-							<li><a href="#">Old</a></li>
-							<li><a href="#">New</a></li>
-						</ul>
-					</li>
+					<li class="active"><a href="{{ path('app_article_index') }}">HOME</a> </li>
+{#					<li class="dropdown">#}
+{#						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>#}
+{#						<ul class="dropdown-menu dropdowncostume">#}
+{#							<li><a href="#">Sport</a></li>#}
+{#							<li><a href="#">Old</a></li>#}
+{#							<li><a href="#">New</a></li>#}
+{#						</ul>#}
+{#					</li>#}
 						{% if app.user %}
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE<span class="caret"></span></a>
@@ -88,7 +91,7 @@
 	{% block homepage %}
 		{# Additional content in the body #}
 	{% endblock %}
-	{% block profilehome %}
+	{% block profile %}
 		{# Additional content in the body #}
 	{% endblock %}
 	{% block newarticle %}
@@ -96,9 +99,14 @@
 	{% endblock %}
 
 	{% block detailsarticle %}
-		{% block addbid %}
 
-		{% endblock %}
+
+	{% endblock %}
+	{% block addbid %}
+
+	{% endblock %}
+	{% block editarticle %}
+
 	{% endblock %}
 
 
