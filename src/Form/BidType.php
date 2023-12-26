@@ -26,19 +26,19 @@ class BidType extends AbstractType
 
             ->add('bidingprice', TextType::class, [
                 'label' => 'Bid Price',
-                'constraints' => [
-                    new Assert\GreaterThanOrEqual([
-                        'value' => $options['min_price'],
-                        'message' => 'The bid price must be greater than or equal to {{ compared_value }}.',
-                    ]),
-                    new Assert\LessThanOrEqual([
-                        'value' => $options['max_price'],
-                        'message' => 'The bid price must be less than or equal to {{ compared_value }}.',
-                    ]),
-                    new Callback([
-                        'callback' => [$this, 'validateBid'],
-                    ]),
-                ],
+//                'constraints' => [
+//                    new Assert\GreaterThanOrEqual([
+//                        'value' => $options['min_price'],
+//                        'message' => 'The bid price must be greater than or equal to {{ compared_value }}.',
+//                    ]),
+//                    new Assert\LessThanOrEqual([
+//                        'value' => $options['max_price'],
+//                        'message' => 'The bid price must be less than or equal to {{ compared_value }}.',
+//                    ]),
+//                    new Callback([
+//                        'callback' => [$this, 'validateBid'],
+//                    ]),
+//                ],
             ]);
     }
 

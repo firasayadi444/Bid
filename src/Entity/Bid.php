@@ -6,6 +6,7 @@ use DateTime;
 use App\Repository\BidRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -18,9 +19,12 @@ class Bid
     #[ORM\Column]
     private ?int $id = null;
 
-
+//    /**
+//     * @Assert\LessThanOrEqual(propertyPath="prix_final", message="The piding price must be less than the final price.")
+//     */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 4)]
     private ?string $bidingprice = null;
+
      /**
      * @param \DateTimeImmutable|null $date_deb
      */

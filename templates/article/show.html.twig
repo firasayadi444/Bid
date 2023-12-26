@@ -10,21 +10,33 @@
                      <img class="card-img-top mb-5 mb-md-0" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="..." />
                  </div>
                  <div class="col-md-6">
-                     <div class="small mb-1">{{ article.user.nom }}</div>
+                     <div >{{ article.user.nom }}</div>
                      <h1 class="display-1 fw-bolder">{{  article.titre }}</h1>
+                     <p class="lead">{{ article.description }}</p>
+
                      <div class="fs-5 mb-5">
                          {#                    <span class="text-decoration-line-through">Start with ${{ article.prixDepart }}</span>#}
                          <span>Start with ${{ article.prixDepart }}</span>
 
                          <span>Max Bid ${{ article.prixFinal }}</span>
+
                      </div>
-                     <p class="lead">{{ article.description }}</p>
-                     <div class="d-flex">
-                         <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                         <button class="btn btn-outline-dark flex-shrink-0" type="button" href="{{ path('app_bid_new', {'article_id': article.id}) }}">
-                             <i class="bi-cart-fill me-1"></i>
-                             ADD BID
-                         </button>
+                     <span>current  Bid ${{ article.winningbidingprice }}</span>
+                     <p>Number of Bids: {{ bidCount }}</p>
+
+                     <div class="fs-5 mb-5">
+                         {#                    <span class="text-decoration-line-through">Start with ${{ article.prixDepart }}</span>#}
+                         {# Check if datefin is greater than the current date #}
+                         {% if  article.DateFin | date('Y-m-d ') > "now"|date('Y-m-d ') %}
+                             <span>Ends on {{ article.DateFin | date('Y-m-d ') }}</span>
+
+                     <form method="post" action="{{ path('app_bid_new', {'article_id': article.id}) }}" class="d-flex">
+                         {{ form_row(form.bidingprice) }}
+                         <button type="submit" class="btn btn-outline-dark flex-shrink-0">Submit Bid</button>
+                     </form>
+                         {% else %}
+                             <span>Expired</span>
+                         {% endif %}
                      </div>
                  </div>
              </div>

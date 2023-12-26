@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Bid;
 use App\Form\ArticleType;
+use App\Form\BidType;
 use App\Repository\ArticleRepository;
+use App\Repository\BidRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -35,6 +38,23 @@ class ArticleController extends AbstractController
 
         return $this->render('article/myarticles.html.twig', [
             'articles' => $articles,
+        ]);
+    }
+    #[Route('/{articleId}/article_bids', name: 'article_bids', methods: ['GET'])]
+    public function articleBids(EntityManagerInterface $entityManager, $articleId , BidRepository $bidRepository): Response
+    {
+//        $user = $this->getUser(); // Assuming you are using Symfony's security system
+
+        // Fetch articles with their associated bids
+//        $articlesWithBids = $entityManager
+//            ->getRepository(Bid::class)
+//            ->findBidsForUserAndArticle($articleId ); // You need to define this custom method in your repository
+        $articlesWithBids = $bidRepository->findBy(['article' => $articleId],
+            ['bidingprice' => 'DESC']
+        );
+
+        return $this->render('bid/articlebids.html.twig', [
+            'articlesWithBids' => $articlesWithBids,
         ]);
     }
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
@@ -84,16 +104,35 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{article_id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(int $article_id, ArticleRepository $articleRepository): Response
+    public function show(int $article_id, ArticleRepository $articleRepository,
+                         EntityManagerInterface $entityManager, BidRepository $bidRepository): Response
     {
         $article = $articleRepository->find($article_id);
+        $maxBidAmount = $bidRepository->getMaxBidAmountForArticle($article);
+        $article-> setWinningbidingprice($maxBidAmount);
+        $bidCount = $bidRepository->countBidsForArticle($article_id);
 
-        if (!$article) {
-            // Handle not found case, e.g., redirect or show an error
-        }
+        $bid = new Bid();
 
+        // Set the user from the session
+        $user = $this->getUser();
+        $bid->setUser($user);
+
+        // Set the bid date
+        $bid->setBidingdate(new \DateTimeImmutable());
+
+        // Get the article using the passed article_id
+
+        // Set the article for the bid
+        $bid->setArticle($article);
+        $form = $this->createForm(BidType::class, $bid, [
+            'article' => $article, // Pass the article as an option
+        ]);
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'form' => $form->createView(), // Include the form variable even if not used in the template
+            'bidCount' => $bidCount,
+
         ]);
     }
 

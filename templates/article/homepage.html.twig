@@ -24,7 +24,13 @@
                                     <!-- Product details-->
                                     <ul class="list-unstyled">
                                         <li>{{ article.description }}</li>
+                                        <li>Date deb: {{ article.dateDeb ? article.dateDeb|date('Y-m-d') : '' }}</li>
+                                        {% if  article.DateFin | date('Y-m-d ') > "now"|date('Y-m-d ') %}
+
                                         <li>Date: {{ article.dateDeb ? article.dateDeb|date('Y-m-d') : '' }}</li>
+                                        {% else %}
+                                            <li style="color: red;"> expired </li>
+                                            {% endif %}
                                         <li>Price: ${{article.prixDepart }} - ${{ article.prixFinal }}</li>
                                     </ul>
                                 </div>
@@ -45,13 +51,6 @@
             </div>
         </div>
     </section>
-    {% if app.user %}
-        <li>
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        </li>
 
-    {% endif %}
 {% endblock %}
 

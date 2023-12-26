@@ -20,19 +20,6 @@ class UserController extends AbstractController
 
 
 
-    #[Route('/{articleId}/user_bids', name: 'user_bids', methods: ['GET'])]
-    public function getUserBidsForUserArticles(BidRepository $bidRepository,$articleId): Response
-    {
-
-        $userId = $this->getUser();
-        $userBidsForArticles = $bidRepository->findBidsForUserAndArticle($userId, $articleId);
-
-        return $this->render('bid/articlebids.html.twig', [
-            'userBidsForArticles' => $userBidsForArticles,
-        ]);
-    }
-
-
 
     #[Route('/{iduser}', name: 'app_usr_profile', methods: ['GET'])]
     public function profile(): Response

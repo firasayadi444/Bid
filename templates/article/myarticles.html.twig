@@ -23,7 +23,9 @@
             <th class="ms-auto me-4">
                 <small>Prix départ</small>
             </th>
-
+            <th class="ms-auto me-4">
+                <small>status</small>
+            </th>
             <th class="ms-auto me-4">
                 <small>Bids</small>
             </th>
@@ -52,8 +54,20 @@
                 <td class="ms-auto " >
                     <h6>{{ article.prixDepart }}</h6>
                 </td>
-                <td class="ms-auto ">
-                    <button><a href="{{ path('user_bids', {'articleId': article.id}) }} " class="btn custom-btn">See all bids</a></button>
+                {% if  article.DateFin | date('Y-m-d ') > "now"|date('Y-m-d ') %}
+
+                <td class="ms-auto " >
+                    <h6>availale</h6>
+                </td>
+                {% else %}
+                    <td class="ms-auto">
+                    <h6  style="color: red;">
+                        expired
+                    </h6>
+                </td>
+                {% endif %}
+                <td class="ms-auto " >
+                    <button><a href="{{ path('article_bids', {'articleId': article.id}) }} " class="btn custom-btn">See all bids</a></button>
                 </td>
                 <td class="ms-auto ">
                     <button><a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn custom-btn">update</a></button>

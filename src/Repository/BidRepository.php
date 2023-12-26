@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
 use App\Entity\Bid;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,18 +22,35 @@ class BidRepository extends ServiceEntityRepository
         parent::__construct($registry, Bid::class);
     }
 
-    public function findBidsForUserAndArticle($userId,$articleId)
+    public function findBidsForUserAndArticle($articleId)
     {
         return $this->createQueryBuilder('b')
             ->join('b.article', 'a')
-            ->where('b.user = :userId')
-            ->andWhere('a.id = :articleId')
+            ->where('a.id = :articleId')
             ->setParameters([
-                'userId' => $userId,
                 'articleId' => $articleId,
             ])
             ->getQuery()
             ->getResult();
+    }
+    // $winningbidingprice
+    public function getMaxBidAmountForArticle(Article $article): ?float
+    {
+        return $this->createQueryBuilder('b')
+            ->select('MAX(b.bidingprice) as maxBidAmount')
+            ->where('b.article = :article')
+            ->setParameter('article', $article)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+    public function countBidsForArticle(int $articleId): int
+    {
+        return $this->createQueryBuilder('b')
+            ->select('COUNT(b.id)')
+            ->where('b.article = :articleId')
+            ->setParameter('articleId', $articleId)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 

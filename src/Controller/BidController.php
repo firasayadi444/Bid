@@ -25,16 +25,17 @@ class BidController extends AbstractController
         return $this->render('bid/show.html.twig', [
             'bids' => $bidRepository->findAll(),
         ]);
+
     }
 //    #[Route('/', name: 'app_bid_index', methods: ['GET'])]
-//    public function index(BidRepository $bidRepository): Response
+//    public function bids(BidRepository $bidRepository): Response
 //    {
-//        $user = $this->getUser();
-//        $bids = $bidRepository->findBy(['user' => $user]);
+//        $bids=>$bidRepository->findAll();
 //
 //        return $this->render('bid/show.html.twig', [
-//            'bids' => $bids,
+//            'bids'=>$bids ,
 //        ]);
+//
 //    }
 
     #[Route('/new/{article_id}', name: 'app_bid_new', methods: ['GET', 'POST'])]
@@ -115,18 +116,19 @@ class BidController extends AbstractController
         return $this->redirectToRoute('app_bid_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('bid/article_bids', name: 'article_bids', methods: ['GET'])]
-    public function articleBids(EntityManagerInterface $entityManager): Response
-    {
-        // Fetch articles with their associated bids
-        $articlesWithBids = $this->$entityManager
-            ->getRepository(Article::class)
-            ->findAllWithBids(); // You need to define this custom method in your repository
-
-        return $this->render('bid/articlebids.html.twig', [
-            'articlesWithBids' => $articlesWithBids,
-        ]);
-    }
+//    #[Route('bid/{articleId}/article_bids/', name: 'article_bids', methods: ['GET'])]
+//    public function articleBids(EntityManagerInterface $entityManager, $articleId ): Response
+//    {        $user = $this->getUser(); // Assuming you are using Symfony's security system
+//
+//        // Fetch articles with their associated bids
+//        $articlesWithBids = $this->$entityManager
+//            ->getRepository(Article::class)
+//            ->findBidsForUserAndArticle($user,$articleId ); // You need to define this custom method in your repository
+//
+//        return $this->render('bid/articlebids.html.twig', [
+//            'articlesWithBids' => $articlesWithBids,
+//        ]);
+//    }
 
 
 
