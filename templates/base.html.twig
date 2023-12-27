@@ -36,37 +36,33 @@
 	<!-- Navbar Up -->
 	<nav class="topnavbar navbar-default topnav navbar-fixed-top">
 		<div class="container">
-			{#			<div class="navbar-header">#}
-			{#				<a class="navbar-brand logo" href="#"><img src="{{ asset('image/logo.jpg') }}" alt="logo"></a>#}
-			{#			</div>#}
 			<div class="collapse navbar-collapse" id="upmenu">
-				{% block navbar%}
+				{% block navbar %}
 
 					<ul class="nav navbar-nav" id="navbarontop">
+						{% if app.user %}
+							<!-- User's name on the left side -->
+							<li class="user-name">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								{{ app.user.nom }}
+							</li>
+						{% endif %}
+
 						<li class="active"><a href="{{ path('app_article_index') }}">HOME</a> </li>
 						<li class="active"><a href="{{ path('app_article_index') }}">NOTIFICATION</a> </li>
 
-						{#					<li class="dropdown">#}
-						{#						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>#}
-						{#						<ul class="dropdown-menu dropdowncostume">#}
-						{#							<li><a href="#">Sport</a></li>#}
-						{#							<li><a href="#">Old</a></li>#}
-						{#							<li><a href="#">New</a></li>#}
-						{#						</ul>#}
-						{#					</li>#}
 						{% if app.user %}
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE<span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PROFILE<span class="caret"></span></a>
 
 								<ul class="dropdown-menu dropdowncostume">
-									<li><a href="{{path('app_usr_profile', {'iduser': app.user.userIdentifier }) }}">OverView</a></li>
-									<li><a href="{{path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My articles</a></li>
-									<li><a href="{{path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My bids</a></li>
-									<li><a href="{{path('user_profile_edit', {'iduser': app.user.userIdentifier }) }}">Setting </a></li>
+									<li><a href="{{ path('app_usr_profile', {'iduser': app.user.userIdentifier }) }}">OverView</a></li>
+									<li><a href="{{ path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My articles</a></li>
+									<li><a href="{{ path('app_usr_article_index', {'iduser': app.user.userIdentifier }) }}">My bids</a></li>
+									<li><a href="{{ path('user_profile_edit', {'iduser': app.user.userIdentifier }) }}">Setting </a></li>
 									<li><a href="{{ path('app_logout') }}"> Logout</a></li>
 								</ul>
 							</li>
-
 
 							<button><a class="postnewcar" href="{{ path('app_article_new') }}">POST NEW ARTICLE</a></button>
 						{% endif %}
@@ -74,10 +70,10 @@
 					</ul>
 				{% endblock %}
 
-
 			</div>
 		</div>
 	</nav>
+
 </div>
 
 <div class="allcontain">
@@ -105,17 +101,7 @@
 	{% endblock %}
 	{% block editarticle %}
 	{% endblock %}
-</div>
-<div class="bottommenu">
-	<div class="footer">
-		<div class="copyright">
-			&copy; Copy right 2023 | <a href="#">Privacy </a>| <a href="#">Policy</a>
-		</div>
-		<div class="atisda">
-			Designed by <a >Bid App </a>
-		</div>
-	</div>
-</div>
+
 {% block javascripts %}
 	{{ encore_entry_script_tags('app') }}
 	<script type="text/javascript" src="{{asset('source/bootstrap-3.3.6-dist/js/jquery.js')}}"></script>
