@@ -14,25 +14,28 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
+                {{ form_start(form, { 'attr': {'enctype': 'multipart/form-data'} }) }}
+
                 <div class="col-md-6">
-                    {{ form_start(form, { 'attr': {'enctype': 'multipart/form-data'} }) }}
-                    {# Add this line for the file upload field #}
-                    <img class="card-img-top mb-5 mb-md-0" src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="..." />
+
+                    <div class="card">
+                        {{ form_row(form.imageFile, {'attr': {'class': 'card-img-top mb-5 mb-md-0'}}) }}
+                        {% if article.imageName is defined and article.imageName is not null %}
+{#                            <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Current Image" style="max-width: 200px; max-height: 200px;">#}
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <h2 class="display-1 fw-bolder">    {{ form_row(form.titre) }}
-                    </h2>
+
                     <div class="fs-5 mb-5">
+                       <span>  {{ form_row(form.titre) }}</span>
+                        <span> {{ form_row(form.description) }}</span>
                         <span> {{ form_row(form.prix_depart) }}</span>
                         <span> {{ form_row(form.prix_final) }}</span>
                         <span> {{ form_row(form.date_fin) }}</span>
-
                     </div>
-                    <p class="lead">      {{ form_row(form.description) }}
-                    </p>
-                    {{ form_row(form.imageFile) }}
                     <div class="d-flex">
-                        <button type="submit">Save</button>
+                        <button type="submit">update</button>
 
                     </div>
                 </div>

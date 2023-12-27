@@ -23,14 +23,16 @@ class ArticleType extends AbstractType
              // Add the file upload field
              ->add('imageFile', VichImageType::class, [
                 'required' => false, // Set to true if the image is mandatory
-                'allow_delete' => true,
+//                'allow_delete' => true,
                 'download_uri' => false,
-            ]);
-
-        // Add the existing image field (if you want to display it in the form)
-        $builder->add('image', HiddenType::class, [
-            'mapped' => false,
-        ]);
+                 'attr' => [
+                     'class' => 'card-img-top mb-5 mb-md-0',],
+                 ]);
+//
+//        // Add the existing image field (if you want to display it in the form)
+//        $builder->add('image', HiddenType::class, [
+//            'mapped' => false,
+//        ]);
     
     }
 
