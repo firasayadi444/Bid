@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Bid;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Proxies\__CG__\App\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<Bid>
@@ -52,7 +53,26 @@ class BidRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-
+    //methode to get the winning user
+    public function getWinningUser(Article $article): ?User
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b.user')
+            ->where('b.article = :article')
+            ->setParameter('article', $article)
+            ->orderBy('b.bidingprice', 'DESC') // Order by bid amount in descending order
+            ->setMaxResults(1) // Get only the top result, which is the user with the maximum bid
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    public function findEndedBids()
+    {
+        return $this->createQueryBuilder('a') // 'a' is an alias for the Article entity
+        ->andWhere('a.date_fin <= :currentDate')
+            ->setParameter('currentDate', new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Bid[] Returns an array of Bid objects
