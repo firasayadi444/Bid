@@ -1,0 +1,30 @@
+/*body {*/
+/*    background-image: url('../image/pngtree-bidding-or-auction-auctions-involving-to-a-purchase-of-an-item-png-image_4369371.png');*/
+/*    background-size: cover; !* Adjust as needed *!*/
+/*    !* Additional styles can be added, such as background-position, background-repeat, etc. *!*/
+/*}*/
+body {
+    background-image: url('../image/pngtree-bidding-or-auction-auctions-involving-to-a-purchase-of-an-item-png-image_4369371.png');
+    background-size: cover; /* Adjust as needed */
+    /* Additional styles can be added, such as background-position, background-repeat, etc. */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.content {
+    padding: 20px;
+}

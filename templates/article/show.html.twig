@@ -33,7 +33,7 @@
                              <span style="color: red; font-weight: bold; text-decoration: underline;">Ends on {{ article.DateFin | date('Y-m-d ') }}</span>
 
                      <form method="post" action="{{ path('app_bid_new', {'article_id': article.id}) }}" class="d-flex">
-                         {{ form_row(form.bidingprice) }}
+{#                         {{ form_row(form.bidingprice) }}#}
                          <button type="submit" class="btn btn-outline-dark flex-shrink-0">Submit Bid</button>
                      </form>
                          {% else %}
