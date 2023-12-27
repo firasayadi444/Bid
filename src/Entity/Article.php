@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Event\ArticleExpiredEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -120,6 +122,8 @@ class Article
     public function setDateFin(\DateTimeImmutable $date_fin): static
     {
         $this->date_fin = $date_fin;
+
+
         return $this;
     }
 
