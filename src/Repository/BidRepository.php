@@ -56,7 +56,7 @@ class BidRepository extends ServiceEntityRepository
     }
     //methode to get the winning user
     public function getWinningUser(int $articleId): ?User
-    {try{
+    {
         return $this->createQueryBuilder('b')
             ->select('b.user')
             ->where('b.article = :articleId')
@@ -65,10 +65,7 @@ class BidRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
-    }    catch (\Doctrine\ORM\NonUniqueResultException $e) {
-    // Handle the exception (e.g., log it or throw a custom exception)
-    return null;
-    }
+
     }
     public function findEndedBids()
     {

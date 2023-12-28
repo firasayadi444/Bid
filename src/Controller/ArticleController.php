@@ -112,7 +112,7 @@ class ArticleController extends AbstractController
         $maxBidAmount = $bidRepository->getMaxBidAmountForArticle($article);
         $article-> setWinningbidingprice($maxBidAmount);
         $bidCount = $bidRepository->countBidsForArticle($article_id);
-        $userwinning=$bidRepository->getWinningUser($article);
+        $userwinning=$bidRepository->getWinningUser((int)$article);
 
         $bid = new Bid();
 
