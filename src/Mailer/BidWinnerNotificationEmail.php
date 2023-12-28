@@ -2,8 +2,14 @@
 
 namespace App\Mailer;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\Annotation\Route;
+
 class BidWinnerNotificationEmail extends TemplatedEmail
 {
     public function __construct(string $winnerEmail, string $productName)
@@ -18,4 +24,5 @@ class BidWinnerNotificationEmail extends TemplatedEmail
                 'productName' => $productName,
             ]);
     }
+
 }

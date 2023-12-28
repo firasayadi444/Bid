@@ -3,37 +3,57 @@
 {% block title %}User Bids{% endblock %}
 
 {% block myarticlesbids %}
-    <table class="custom-block custom-block-exchange">
+    <table class="custom-block custom-block-exchange" style="border: 1px solid #9a8c8c;">
         <thead>
-        <tr class="d-flex align-items-center border-bottom pb-3 mb-3" >
-
+        <tr class="d-flex align-items-center border-bottom pb-3 mb-3">
             <th class="ms-auto me-4">
-                <small> bidder </small>
+                <small> Bidder </small>
             </th>
             <th class="ms-auto me-4">
-                <small>Bid Date</small>
+                <small> Bid Date </small>
             </th>
-
             <th class="ms-auto me-4">
-                <small>Prix bid</small>
+                <small> Prix bid </small>
+            </th>
+            <th class="ms-auto me-4">
+                <small> Actions </small>
             </th>
         </tr>
         </thead>
         <tbody>
         {% if articlesWithBids is empty %}
-            <p>vide</p>
+            <tr>
+                <td colspan="4">vide</td>
+            </tr>
         {% endif %}
-        {% for bid in articlesWithBids %}
+        {% for key, bid in articlesWithBids|slice(0, 1) %}
             <tr class="d-flex align-items-center border-bottom pb-3 mb-3">
-                <td class="ms-auto  " >
+                <td class="ms-auto">
                     <h6>{{ bid.user }}</h6>
                 </td>
-                <td class="ms-auto  " >
+                <td class="ms-auto">
                     <h6>{{ bid.bidingdate ? bid.bidingdate|date('Y-m-d') : '' }}</h6>
                 </td>
-                <td class="ms-auto ">
+                <td class="ms-auto">
                     <h6>{{ bid.bidingprice }}</h6>
                 </td>
+                <td class="ms-auto">
+                    <a href="{{ path('send_email', {'id_article': bid.id_article}) }}" class="btn btn-primary">Contact Winner</a>
+                </td>
+            </tr>
+        {% endfor %}
+        {% for bid in articlesWithBids|slice(1) %}
+            <tr class="d-flex align-items-center border-bottom pb-3 mb-3">
+                <td class="ms-auto">
+                    <h6>{{ bid.user }}</h6>
+                </td>
+                <td class="ms-auto">
+                    <h6>{{ bid.bidingdate ? bid.bidingdate|date('Y-m-d') : '' }}</h6>
+                </td>
+                <td class="ms-auto">
+                    <h6>{{ bid.bidingprice }}</h6>
+                </td>
+                <td class="ms-auto"></td> {# Empty cell for other rows #}
             </tr>
         {% endfor %}
         </tbody>
