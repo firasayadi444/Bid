@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Article;
 
+use App\Repository\ArticleRepository;
+use App\Repository\BidRepository;
+use App\service\mailerservice;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,24 +17,20 @@ class MailerController extends AbstractController
     #[Route('/mailer', name: 'app_mailer')]
     public function index(): Response
     {
-        return $this->render('mailer/index.html.twig', [
+        return $this->render('sendmail.html.twig', [
             'controller_name' => 'MailerController',
         ]);
     }
-    public function sendEmail(MailerInterface $mailer): void
+    #[Route('/{article_id}/mailer', name: 'app_mailersend')]
+    public function send( BidRepository $bidRepository,  $article_id, mailerservice $mailer,
+                        ArticleRepository $articleRepository): void
     {
-        $email = (new Email())
-            ->from('hello@example.com')
-            ->to('you@example.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
+//        $article = $articleRepository->find($article_id);
+        $userwinning=$bidRepository->getWinningUser($article_id);
+       $userwinneremail= $userwinning->getEmail();
 
-        $mailer->send($email);
+        $mailer->sendEmail($userwinneremail);
+
 
 
     }

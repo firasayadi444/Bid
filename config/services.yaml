@@ -30,3 +30,8 @@ services:
          $mailer: '@Symfony\Component\Mailer\MailerInterface'
        tags:
          - { name: 'console.command' }
+     App\Command\TestMailerCommand:
+       arguments:
+         $mailerService: '@App\service\mailerservice'
+       tags:
+         - { name: 'console.command' }

@@ -37,9 +37,7 @@
                 <td class="ms-auto">
                     <h6>{{ bid.bidingprice }}</h6>
                 </td>
-                <td class="ms-auto">
-                    <a href="{{ path('send_email', {'id_article': bid.id_article}) }}" class="btn btn-primary">Contact Winner</a>
-                </td>
+
             </tr>
         {% endfor %}
         {% for bid in articlesWithBids|slice(1) %}

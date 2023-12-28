@@ -32,6 +32,9 @@
             <th class="ms-auto me-4">
                 <small>update</small>
             </th>
+            <th class="ms-auto me-4">
+                <small> Actions </small>
+            </th>
 
         </tr>
         </thead>
@@ -71,6 +74,9 @@
                 </td>
                 <td class="ms-auto ">
                     <button><a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn custom-btn">update</a></button>
+                </td>
+                <td class="ms-auto">
+                    <a href="{{ path('app_mailersend', {'article_id': article.id}) }}" class="btn btn-primary">Contact Winner</a>
                 </td>
 
             </tr>

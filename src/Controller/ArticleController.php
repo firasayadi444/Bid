@@ -8,6 +8,7 @@ use App\Form\ArticleType;
 use App\Form\BidType;
 use App\Repository\ArticleRepository;
 use App\Repository\BidRepository;
+use App\service\mailerservice;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -105,12 +106,13 @@ class ArticleController extends AbstractController
 
     #[Route('/{article_id}', name: 'app_article_show', methods: ['GET'])]
     public function show(int $article_id, ArticleRepository $articleRepository,
-                         EntityManagerInterface $entityManager, BidRepository $bidRepository): Response
+                         EntityManagerInterface $entityManager, BidRepository $bidRepository, mailerservice $mailer): Response
     {
         $article = $articleRepository->find($article_id);
         $maxBidAmount = $bidRepository->getMaxBidAmountForArticle($article);
         $article-> setWinningbidingprice($maxBidAmount);
         $bidCount = $bidRepository->countBidsForArticle($article_id);
+        $userwinning=$bidRepository->getWinningUser($article);
 
         $bid = new Bid();
 
